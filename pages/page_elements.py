@@ -23,4 +23,9 @@ class TextBoxPage(BasePage):
         self.element_is_visible(self.locators.CURRENT_ADDRESS).send_keys(current_address)
         self.element_is_visible(self.locators.PERMANENT_ADDRESS).send_keys(permanent_address)
         self.element_is_visible(self.locators.SUBMIT).click()
-        return full_name, mail, current_address, permanent_address
+        return [full_name, mail, current_address, permanent_address]
+
+    def getting_output(self):
+        output_data = self.element_is_visible(self.locators.OUTPUT).text
+        data = output_data.split('\n')
+        return [i.split(':')[1] for i in data]

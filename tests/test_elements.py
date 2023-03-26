@@ -16,5 +16,5 @@ class TestTextBox:
         text_box_page = TextBoxPage(driver, 'https://demoqa.com/text-box')
         text_box_page.open()
         data = text_box_page.filling_text_fields()
-        time.sleep(5)
-        print(data)
+        output_data = text_box_page.getting_output()
+        assert data == output_data, 'input does not match output'
