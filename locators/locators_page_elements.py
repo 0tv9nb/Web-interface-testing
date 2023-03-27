@@ -8,6 +8,5 @@ class TextBoxLocators:
     CURRENT_ADDRESS = (By.CSS_SELECTOR, 'textarea[id="currentAddress"]')
     PERMANENT_ADDRESS = (By.CSS_SELECTOR, 'textarea[id="permanentAddress"]')
     SUBMIT = (By.CSS_SELECTOR, 'button[id="submit"]')
-
     # output
     OUTPUT = (By.CSS_SELECTOR, "div[id='output']")

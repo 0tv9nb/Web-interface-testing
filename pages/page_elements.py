@@ -1,3 +1,4 @@
+from generator.generator import generated_data
 from locators.locators_page_elements import TextBoxLocators
 from pages.base_page import BasePage
 
@@ -14,10 +15,11 @@ class TextBoxPage(BasePage):
     locators = TextBoxLocators()
 
     def filling_text_fields(self):
-        full_name = 'Ага Лол'
-        mail = 'agalol@mail.ru'
-        current_address = 'Москва Ленина 17'
-        permanent_address = 'Москва Советская 1'
+        gen_data=next(generated_data())
+        full_name = gen_data.full_name
+        mail = gen_data.mail
+        current_address = gen_data.current_address
+        permanent_address = gen_data.permanent_address
         self.element_is_visible(self.locators.FULL_NAME).send_keys(full_name)
         self.element_is_visible(self.locators.EMAIL).send_keys(mail)
         self.element_is_visible(self.locators.CURRENT_ADDRESS).send_keys(current_address)
