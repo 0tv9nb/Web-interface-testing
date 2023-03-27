@@ -1,5 +1,5 @@
 from generator.generator import generated_data
-from locators.locators_page_elements import TextBoxLocators
+from locators.locators_page_elements import TextBoxLocators, CheckBoxLocators
 from pages.base_page import BasePage
 
 
@@ -15,7 +15,7 @@ class TextBoxPage(BasePage):
     locators = TextBoxLocators()
 
     def filling_text_fields(self):
-        gen_data=next(generated_data())
+        gen_data = next(generated_data())
         full_name = gen_data.full_name
         mail = gen_data.mail
         current_address = gen_data.current_address
@@ -31,3 +31,17 @@ class TextBoxPage(BasePage):
         output_data = self.element_is_visible(self.locators.OUTPUT).text
         data = output_data.split('\n')
         return [i.split(':')[1] for i in data]
+
+
+class CheckBoxPage(BasePage):
+    locators = CheckBoxLocators()
+
+    def reveal_all_check_box(self):
+        self.element_is_visible(self.locators.EXPAND_ALL).click()
+
+    def hide_all_check_box(self):
+        self.element_is_visible(self.locators.COLLAPSE_ALL).click()
+
+    def number_of_check_box(self):
+        active_check_box = self.element_are_visible(self.locators.CHECK_BOX_LIST)
+        return len(active_check_box)

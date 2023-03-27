@@ -1,6 +1,6 @@
 import time
 
-from pages.page_elements import MainPage, TextBoxPage
+from pages.page_elements import MainPage, TextBoxPage, CheckBoxPage
 
 
 class TestTrial:
@@ -18,3 +18,17 @@ class TestTextBox:
         data = text_box_page.filling_text_fields()
         output_data = text_box_page.getting_output()
         assert data == output_data, 'input does not match output'
+
+
+class TestCheckBox:
+    def test_expand_collaps_check_box(self, driver):
+        check_box_page = CheckBoxPage(driver, 'https://demoqa.com/checkbox')
+        check_box_page.open()
+        check_box_page.reveal_all_check_box()
+        expand_check_box = check_box_page.number_of_check_box()
+        check_box_page.hide_all_check_box()
+        collaps_check_box = check_box_page.number_of_check_box()
+        time.sleep(2)
+        print(expand_check_box, collaps_check_box)
+        assert expand_check_box == 17, 'not all checkboxes are open'
+        assert collaps_check_box == 1, 'not all checkboxes are hidden'
