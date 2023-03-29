@@ -1,7 +1,7 @@
 import random
 
 from generator.generator import generated_data
-from locators.locators_page_elements import TextBoxLocators, CheckBoxLocators
+from locators.locators_page_elements import TextBoxLocators, CheckBoxLocators, RadioButtonLocators
 from pages.base_page import BasePage
 
 
@@ -67,3 +67,17 @@ class CheckBoxPage(BasePage):
             active_box = box.find_element("xpath", self.locators.ANCESTOR_ACTIVE_CHECK_BOX)
             active_list.append(active_box.text)
         return str(active_list).lower().replace(' ', '').replace('.doc', '')
+
+
+class RadioButtonPage(BasePage):
+    locators = RadioButtonLocators()
+
+    def check_radio_button(self, like):
+        likes = {'Yes': self.locators.RADIO_YES,
+                 "Impressive": self.locators.RADIO_IMPRESSIVE,
+                 "No": self.locators.RADIO_NO
+                 }
+        self.element_is_visible(likes[like]).click()
+
+    def getting_output(self):
+        return self.element_is_visible(self.locators.OUTPUT_SELECTED).text
