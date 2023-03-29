@@ -17,3 +17,5 @@ class CheckBoxLocators:
     COLLAPSE_ALL = (By.CSS_SELECTOR, "button[class='rct-option rct-option-collapse-all']")
     CHECK_BOX_LIST = (By.CSS_SELECTOR, "span[class='rct-checkbox']")
     RESULT = (By.CSS_SELECTOR, "div[id='result']")
+    ACTIVE_CHECK_BOX = (By.CSS_SELECTOR, "svg[class='rct-icon rct-icon-check']")
+    ANCESTOR_ACTIVE_CHECK_BOX = ".//ancestor::span[@class='rct-text']"

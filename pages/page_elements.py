@@ -1,10 +1,12 @@
+import random
+
 from generator.generator import generated_data
 from locators.locators_page_elements import TextBoxLocators, CheckBoxLocators
 from pages.base_page import BasePage
 
 
 class MainPage(BasePage):
-    ''' First test, checked the work '''
+    """First test, checked the work """
 
     def window_title_check(self):
         window_title = self.driver.title
@@ -45,3 +47,23 @@ class CheckBoxPage(BasePage):
     def number_of_check_box(self):
         active_check_box = self.element_are_visible(self.locators.CHECK_BOX_LIST)
         return len(active_check_box)
+
+    def click_random_check_box(self):
+        check_box_list = self.element_are_visible(self.locators.CHECK_BOX_LIST)
+        i = 21
+        while i != 0:
+            check_box = check_box_list[random.randint(0, 16)]
+            check_box.click()
+            i -= 1
+
+    def getting_output(self):
+        result = self.element_is_visible(self.locators.RESULT).text
+        return str(result.lower().split('\n')[1:]).replace(' ', '')
+
+    def search_for_active_check_box(self):
+        active_list = []
+        active_check_box = self.element_are_visible(self.locators.ACTIVE_CHECK_BOX)
+        for box in active_check_box:
+            active_box = box.find_element("xpath", self.locators.ANCESTOR_ACTIVE_CHECK_BOX)
+            active_list.append(active_box.text)
+        return str(active_list).lower().replace(' ', '').replace('.doc', '')

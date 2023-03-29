@@ -28,7 +28,15 @@ class TestCheckBox:
         expand_check_box = check_box_page.number_of_check_box()
         check_box_page.hide_all_check_box()
         collaps_check_box = check_box_page.number_of_check_box()
-        time.sleep(2)
         print(expand_check_box, collaps_check_box)
         assert expand_check_box == 17, 'not all checkboxes are open'
         assert collaps_check_box == 1, 'not all checkboxes are hidden'
+
+    def test_check_box(self, driver):
+        check_box_page = CheckBoxPage(driver, 'https://demoqa.com/checkbox')
+        check_box_page.open()
+        check_box_page.reveal_all_check_box()
+        check_box_page.click_random_check_box()
+        selected_check_box = check_box_page.getting_output()
+        active_check_box = check_box_page.search_for_active_check_box()
+        assert selected_check_box == active_check_box, 'not all active checkboxes are displayed'
