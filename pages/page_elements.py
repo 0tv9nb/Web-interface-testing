@@ -1,7 +1,7 @@
 import random
 
 from generator.generator import generated_data
-from locators.locators_page_elements import TextBoxLocators, CheckBoxLocators, RadioButtonLocators
+from locators.locators_page_elements import TextBoxLocators, CheckBoxLocators, RadioButtonLocators, WebTablesLocators
 from pages.base_page import BasePage
 
 
@@ -81,3 +81,15 @@ class RadioButtonPage(BasePage):
 
     def getting_output(self):
         return self.element_is_visible(self.locators.OUTPUT_SELECTED).text
+
+class WebTablesPage(BasePage):
+    locators=WebTablesLocators()
+    def filling_out_the_form(self):
+        self.element_is_visible(self.locators.ADD_BUTTON).click()
+        self.element_is_visible(self.locators.FIRST_NAME).send_keys('Sasha')
+        self.element_is_visible(self.locators.LAST_NAME).send_keys('Aga')
+        self.element_is_visible(self.locators.EMAIL).send_keys('aga@mail.ru')
+        self.element_is_visible(self.locators.AGE).send_keys(12)
+        self.element_is_visible(self.locators.SALARY).send_keys(111)
+        self.element_is_visible(self.locators.DEPARTMENT).send_keys('doctor')
+        self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
