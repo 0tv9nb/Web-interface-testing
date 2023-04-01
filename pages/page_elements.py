@@ -102,3 +102,4 @@ class WebTablesPage(BasePage):
         self.element_is_visible(self.locators.SALARY).send_keys(salary)
         self.element_is_visible(self.locators.DEPARTMENT).send_keys(department)
         self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+        return [first_name, last_name, mail, age, salary, department]
