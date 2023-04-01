@@ -86,20 +86,27 @@ class RadioButtonPage(BasePage):
 class WebTablesPage(BasePage):
     locators = WebTablesLocators()
 
-    def filling_out_the_form(self):
-        gen_data = next(generated_data())
-        first_name = gen_data.first_name
-        last_name = gen_data.last_name
-        mail = gen_data.mail
-        age = gen_data.age
-        salary = gen_data.salary
-        department = gen_data.department
-        self.element_is_visible(self.locators.ADD_BUTTON).click()
-        self.element_is_visible(self.locators.FIRST_NAME).send_keys(first_name)
-        self.element_is_visible(self.locators.LAST_NAME).send_keys(last_name)
-        self.element_is_visible(self.locators.EMAIL).send_keys(mail)
-        self.element_is_visible(self.locators.AGE).send_keys(age)
-        self.element_is_visible(self.locators.SALARY).send_keys(salary)
-        self.element_is_visible(self.locators.DEPARTMENT).send_keys(department)
-        self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+    def filling_out_the_form(self,count=2):
+        while count>0:
+            gen_data = next(generated_data())
+            first_name = gen_data.first_name
+            last_name = gen_data.last_name
+            mail = gen_data.mail
+            age = gen_data.age
+            salary = gen_data.salary
+            department = gen_data.department
+            self.element_is_visible(self.locators.ADD_BUTTON).click()
+            self.element_is_visible(self.locators.FIRST_NAME).send_keys(first_name)
+            self.element_is_visible(self.locators.LAST_NAME).send_keys(last_name)
+            self.element_is_visible(self.locators.EMAIL).send_keys(mail)
+            self.element_is_visible(self.locators.AGE).send_keys(age)
+            self.element_is_visible(self.locators.SALARY).send_keys(salary)
+            self.element_is_visible(self.locators.DEPARTMENT).send_keys(department)
+            self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+            count-=1
         return [first_name, last_name, mail, age, salary, department]
+
+    def table_search(self,data):
+        search_name=data[random.randint(0,5)]
+        self.element_is_visible(self.locators.SEARCH).send_keys(search_name)
+        print(search_name)

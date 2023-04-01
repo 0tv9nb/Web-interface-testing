@@ -29,6 +29,7 @@ class RadioButtonLocators:
 
 
 class WebTablesLocators:
+    # add form
     ADD_BUTTON = (By.CSS_SELECTOR, "button[id='addNewRecordButton']")
     FIRST_NAME = (By.CSS_SELECTOR, "input[id='firstName']")
     LAST_NAME = (By.CSS_SELECTOR, "input[id='lastName']")
@@ -37,3 +38,7 @@ class WebTablesLocators:
     SALARY = (By.CSS_SELECTOR, "input[id='salary']")
     DEPARTMENT = (By.CSS_SELECTOR, "input[id='department']")
     SUBMIT_BUTTON = (By.CSS_SELECTOR, "button[id='submit']")
+    # table
+    SEARCH = (By.CSS_SELECTOR, "input[id='searchBox']")
+    EDIT = (By.CSS_SELECTOR, "span[class='mr-2']")
+    DELETE = (By.CSS_SELECTOR, "span[id^='delete-record']")
