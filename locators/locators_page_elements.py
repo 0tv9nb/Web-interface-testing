@@ -42,4 +42,5 @@ class WebTablesLocators:
     SEARCH = (By.CSS_SELECTOR, "input[id='searchBox']")
     EDIT = (By.CSS_SELECTOR, "span[class='mr-2']")
     DELETE = (By.CSS_SELECTOR, "span[id^='delete-record']")
-    ROW_DATA=(By.CSS_SELECTOR, "div[class='rt-tr-group']")
+    ROW_DATA = (By.CSS_SELECTOR, "div[class='rt-tr-group']")
+    ROW_PERENTS = ".//ancestor::div[@class='rt-tr-group']"

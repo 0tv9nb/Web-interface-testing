@@ -86,8 +86,9 @@ class RadioButtonPage(BasePage):
 class WebTablesPage(BasePage):
     locators = WebTablesLocators()
 
-    def filling_out_the_form(self,count=2):
-        while count>0:
+    def filling_out_the_form(self, count=2):
+        data = []
+        while count > 0:
             gen_data = next(generated_data())
             first_name = gen_data.first_name
             last_name = gen_data.last_name
@@ -103,11 +104,24 @@ class WebTablesPage(BasePage):
             self.element_is_visible(self.locators.SALARY).send_keys(salary)
             self.element_is_visible(self.locators.DEPARTMENT).send_keys(department)
             self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
-            count-=1
-            return [first_name, last_name, mail, age, salary, department]
+            count -= 1
+            data.append([first_name, last_name, str(age), mail, str(salary), department])
+        return data
 
-    def table_search(self,data):
-        search_name=data[random.randint(0,5)]
+    def table_data_output(self):
+        table_data = self.element_are_presents(self.locators.ROW_DATA)
+        print(len(table_data))
+        data = []
+        for i in table_data:
+            data.append(i.text.splitlines())
+        return data
+
+    def table_search(self, data):
+        search_name = data[random.randint(0, 5)]
         self.element_is_visible(self.locators.SEARCH).send_keys(search_name)
         print(search_name)
 
+    def search_related_data(self):
+        delete_button = self.element_is_visible(self.locators.DELETE)
+        row = delete_button.find_element('xpath', self.locators.ROW_PERENTS)
+        return row.text.splitlines()

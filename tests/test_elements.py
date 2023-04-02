@@ -1,3 +1,4 @@
+import random
 import time
 
 from pages.page_elements import MainPage, TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage
@@ -61,12 +62,16 @@ class TestWebTables:
     def test_adding_record_to_table(self, driver):
         web_table_page = WebTablesPage(driver, 'https://demoqa.com/webtables')
         web_table_page.open()
-        input_data=web_table_page.filling_out_the_form()
-        web_table_page.table_search(input_data)
-        time.sleep(2)
+        input_data = web_table_page.filling_out_the_form(1)
+        output_data = web_table_page.table_data_output()
+        for i in input_data:
+            assert i in output_data, 'there is no entered data in the table'
 
-    def test_adding_record_to_table2(self, driver):
+    def test_search_function(self, driver):
         web_table_page = WebTablesPage(driver, 'https://demoqa.com/webtables')
         web_table_page.open()
-        web_table_page.table_data_output()
-        time.sleep(2)
+        input_data = web_table_page.filling_out_the_form(1)
+        data = input_data[random.randint(0, len(input_data) - 1)]
+        web_table_page.table_search(data)
+        output_data = web_table_page.search_related_data()
+        assert data == output_data, 'search is not working properly'
