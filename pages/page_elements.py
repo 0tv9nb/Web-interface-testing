@@ -104,9 +104,10 @@ class WebTablesPage(BasePage):
             self.element_is_visible(self.locators.DEPARTMENT).send_keys(department)
             self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
             count-=1
-        return [first_name, last_name, mail, age, salary, department]
+            return [first_name, last_name, mail, age, salary, department]
 
     def table_search(self,data):
         search_name=data[random.randint(0,5)]
         self.element_is_visible(self.locators.SEARCH).send_keys(search_name)
         print(search_name)
+

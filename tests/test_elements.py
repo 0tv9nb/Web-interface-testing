@@ -62,3 +62,11 @@ class TestWebTables:
         web_table_page = WebTablesPage(driver, 'https://demoqa.com/webtables')
         web_table_page.open()
         input_data=web_table_page.filling_out_the_form()
+        web_table_page.table_search(input_data)
+        time.sleep(2)
+
+    def test_adding_record_to_table2(self, driver):
+        web_table_page = WebTablesPage(driver, 'https://demoqa.com/webtables')
+        web_table_page.open()
+        web_table_page.table_data_output()
+        time.sleep(2)
