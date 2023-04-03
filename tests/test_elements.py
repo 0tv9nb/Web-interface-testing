@@ -76,10 +76,10 @@ class TestWebTables:
         output_data = web_table_page.search_related_data()
         assert data == output_data, 'search is not working properly'
 
-    def test_updating_data_in_a_table(self,driver):
+    def test_updating_data_in_a_table(self, driver):
         web_table_page = WebTablesPage(driver, 'https://demoqa.com/webtables')
         web_table_page.open()
-        updat_data=web_table_page.update_data()
+        updat_data = web_table_page.update_data()
         output_data = web_table_page.table_data_output()
         print(output_data)
         print(updat_data)
