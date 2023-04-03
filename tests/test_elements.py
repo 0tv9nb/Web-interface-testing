@@ -81,6 +81,13 @@ class TestWebTables:
         web_table_page.open()
         updat_data = web_table_page.update_data()
         output_data = web_table_page.table_data_output()
-        print(output_data)
-        print(updat_data)
         assert updat_data in output_data, 'data has not been changed'
+
+    def test_deleting_data_in_a_table(self, driver):
+        web_table_page = WebTablesPage(driver, 'https://demoqa.com/webtables')
+        web_table_page.open()
+        input_data = web_table_page.filling_out_the_form(1)
+        data = input_data[random.randint(0, len(input_data) - 1)]
+        web_table_page.table_search(data)
+        message = web_table_page.delete_data()
+        assert message == 'No rows found', 'data has not been delete'

@@ -44,3 +44,4 @@ class WebTablesLocators:
     DELETE = (By.CSS_SELECTOR, "span[id^='delete-record']")
     ROW_DATA = (By.CSS_SELECTOR, "div[class='rt-tr-group']")
     ROW_PERENTS = ".//ancestor::div[@class='rt-tr-group']"
+    NO_DATA = (By.CSS_SELECTOR, "div[class='rt-noData']")

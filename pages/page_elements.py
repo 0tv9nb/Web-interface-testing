@@ -111,7 +111,6 @@ class WebTablesPage(BasePage):
 
     def table_data_output(self):
         table_data = self.element_are_presents(self.locators.ROW_DATA)
-        print(len(table_data))
         data = []
         for i in table_data:
             data.append(i.text.splitlines())
@@ -120,7 +119,6 @@ class WebTablesPage(BasePage):
     def table_search(self, data):
         search_name = data[random.randint(0, 5)]
         self.element_is_visible(self.locators.SEARCH).send_keys(search_name)
-        print(search_name)
 
     def search_related_data(self):
         delete_button = self.element_is_visible(self.locators.DELETE)
@@ -155,5 +153,9 @@ class WebTablesPage(BasePage):
         department_cl.clear()
         department_cl.send_keys(department)
         self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
-        time.sleep(3)
         return [first_name, last_name, str(age), mail, str(salary), department]
+
+    def delete_data(self):
+        self.element_is_visible(self.locators.DELETE).click()
+        deletion_messages = self.element_is_visible(self.locators.NO_DATA).text
+        return deletion_messages
