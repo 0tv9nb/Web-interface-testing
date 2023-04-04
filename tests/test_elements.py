@@ -1,6 +1,7 @@
+import random
 import time
 
-from pages.page_elements import MainPage, TextBoxPage, CheckBoxPage, RadioButtonPage
+from pages.page_elements import MainPage, TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage
 
 
 class TestTrial:
@@ -55,3 +56,45 @@ class TestRadioButton:
         assert output_yes == 'Yes', 'Yes, is not pressed'
         assert output_impressive == 'Impressive', 'Impressive, is not pressed'
         assert output_no == 'No', 'No, is not pressed'
+
+
+class TestWebTables:
+    def test_adding_record_to_table(self, driver):
+        web_table_page = WebTablesPage(driver, 'https://demoqa.com/webtables')
+        web_table_page.open()
+        input_data = web_table_page.filling_out_the_form(1)
+        output_data = web_table_page.table_data_output()
+        for i in input_data:
+            assert i in output_data, 'there is no entered data in the table'
+
+    def test_search_function(self, driver):
+        web_table_page = WebTablesPage(driver, 'https://demoqa.com/webtables')
+        web_table_page.open()
+        input_data = web_table_page.filling_out_the_form(1)
+        data = input_data[random.randint(0, len(input_data) - 1)]
+        web_table_page.table_search(data)
+        output_data = web_table_page.search_related_data()
+        assert data == output_data, 'search is not working properly'
+
+    def test_updating_data_in_a_table(self, driver):
+        web_table_page = WebTablesPage(driver, 'https://demoqa.com/webtables')
+        web_table_page.open()
+        updat_data = web_table_page.update_data()
+        output_data = web_table_page.table_data_output()
+        assert updat_data in output_data, 'data has not been changed'
+
+    def test_deleting_data_in_a_table(self, driver):
+        web_table_page = WebTablesPage(driver, 'https://demoqa.com/webtables')
+        web_table_page.open()
+        input_data = web_table_page.filling_out_the_form(1)
+        data = input_data[random.randint(0, len(input_data) - 1)]
+        web_table_page.table_search(data)
+        message = web_table_page.delete_data()
+        assert message == 'No rows found', 'data has not been delete'
+
+    def test_number_of_displayed_rows(self, driver):
+        web_table_page = WebTablesPage(driver, 'https://demoqa.com/webtables')
+        web_table_page.open()
+        options = [5, 10, 20, 25, 50, 100]
+        numder_line = web_table_page.choose_number_of_rows(options)
+        assert options == numder_line, 'dropdown not working'
