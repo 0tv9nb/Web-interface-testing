@@ -1,5 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
 
 
 class BasePage:
@@ -26,3 +27,7 @@ class BasePage:
 
     def remove_futer(self):
         self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
+
+    def option_select(self, text, locator):
+        select = Select(self.element_is_visible(locator))
+        select.select_by_visible_text(text)
