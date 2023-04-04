@@ -159,3 +159,11 @@ class WebTablesPage(BasePage):
         self.element_is_visible(self.locators.DELETE).click()
         deletion_messages = self.element_is_visible(self.locators.NO_DATA).text
         return deletion_messages
+
+    def choose_number_of_rows(self, lis):
+        numbers_row = []
+        for i in lis:
+            self.option_select(f"{i} rows", self.locators.SELECT_LIST)
+            lines = self.element_are_visible(self.locators.ROW_DATA)
+            numbers_row.append(len(lines))
+        return numbers_row

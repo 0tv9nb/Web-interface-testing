@@ -45,3 +45,5 @@ class WebTablesLocators:
     ROW_DATA = (By.CSS_SELECTOR, "div[class='rt-tr-group']")
     ROW_PERENTS = ".//ancestor::div[@class='rt-tr-group']"
     NO_DATA = (By.CSS_SELECTOR, "div[class='rt-noData']")
+    # drop_down_list
+    SELECT_LIST = (By.CSS_SELECTOR, "select[aria-label='rows per page']")

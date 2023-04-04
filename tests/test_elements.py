@@ -91,3 +91,10 @@ class TestWebTables:
         web_table_page.table_search(data)
         message = web_table_page.delete_data()
         assert message == 'No rows found', 'data has not been delete'
+
+    def test_number_of_displayed_rows(self, driver):
+        web_table_page = WebTablesPage(driver, 'https://demoqa.com/webtables')
+        web_table_page.open()
+        options = [5, 10, 20, 25, 50, 100]
+        numder_line = web_table_page.choose_number_of_rows(options)
+        assert options == numder_line, 'dropdown not working'
