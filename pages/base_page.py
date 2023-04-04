@@ -23,3 +23,6 @@ class BasePage:
 
     def element_are_presents(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
+
+    def remove_futer(self):
+        self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
