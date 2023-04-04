@@ -47,3 +47,12 @@ class WebTablesLocators:
     NO_DATA = (By.CSS_SELECTOR, "div[class='rt-noData']")
     # drop_down_list
     SELECT_LIST = (By.CSS_SELECTOR, "select[aria-label='rows per page']")
+
+
+class ButtonsLocators:
+    # buttons
+    BUTTONS = (By.CSS_SELECTOR, "button[class='btn btn-primary']")
+    # message
+    DOUBLE_CLICK_MESSAGE = (By.CSS_SELECTOR, "p[id='doubleClickMessage']")
+    RIGHT_CLICK_MESSAGE = (By.CSS_SELECTOR, "p[id='rightClickMessage']")
+    CLICK_MESSAGE = (By.CSS_SELECTOR, "p[id='dynamicClickMessage']")

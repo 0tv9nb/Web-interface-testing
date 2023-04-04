@@ -2,7 +2,8 @@ import random
 import time
 
 from generator.generator import generated_data
-from locators.locators_page_elements import TextBoxLocators, CheckBoxLocators, RadioButtonLocators, WebTablesLocators
+from locators.locators_page_elements import TextBoxLocators, CheckBoxLocators, RadioButtonLocators, WebTablesLocators, \
+    ButtonsLocators
 from pages.base_page import BasePage
 
 
@@ -167,3 +168,19 @@ class WebTablesPage(BasePage):
             lines = self.element_are_visible(self.locators.ROW_DATA)
             numbers_row.append(len(lines))
         return numbers_row
+
+
+class ButtonsPage(BasePage):
+    locators = ButtonsLocators()
+
+    def button_clicks(self):
+        buttons = self.element_are_visible(self.locators.BUTTONS)
+        self.action_double_click(buttons[0])
+        self.action_right_click(buttons[1])
+        buttons[2].click()
+
+    def message_on_click(self):
+        double_click_messege = self.element_is_visible(self.locators.DOUBLE_CLICK_MESSAGE).text
+        right_click_messege = self.element_is_visible(self.locators.RIGHT_CLICK_MESSAGE).text
+        click_messege = self.element_is_visible(self.locators.CLICK_MESSAGE).text
+        return [double_click_messege, right_click_messege, click_messege]

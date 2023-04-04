@@ -1,7 +1,7 @@
 import random
 import time
 
-from pages.page_elements import MainPage, TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage
+from pages.page_elements import MainPage, TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage
 
 
 class TestTrial:
@@ -59,6 +59,7 @@ class TestRadioButton:
 
 
 class TestWebTables:
+
     def test_adding_record_to_table(self, driver):
         web_table_page = WebTablesPage(driver, 'https://demoqa.com/webtables')
         web_table_page.open()
@@ -98,3 +99,14 @@ class TestWebTables:
         options = [5, 10, 20, 25, 50, 100]
         numder_line = web_table_page.choose_number_of_rows(options)
         assert options == numder_line, 'dropdown not working'
+
+
+class TestButtons:
+    def test_buttons(self, driver):
+        buttons_page = ButtonsPage(driver, 'https://demoqa.com/buttons')
+        buttons_page.open()
+        buttons_page.button_clicks()
+        messeges = buttons_page.message_on_click()
+        assert messeges[0] == 'You have done a double click', 'button "double click" is not pressed'
+        assert messeges[1] == 'You have done a right click', 'button "right click" is not pressed'
+        assert messeges[2] == 'You have done a dynamic click', 'button "dynamic click" is not pressed'
