@@ -44,3 +44,7 @@ class BasePage:
     def switch_to_new_window(self, num_windows=2, timeout=5):
         wait(self.driver, timeout).until(EC.number_of_windows_to_be(num_windows))
         self.driver.switch_to.window(self.driver.window_handles[-1])
+
+    def switch_to_start_window(self):
+        self.driver.switch_to.window(self.driver.window_handles[0])
+
