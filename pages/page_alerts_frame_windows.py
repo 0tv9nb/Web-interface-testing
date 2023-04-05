@@ -15,3 +15,10 @@ class BrowserWindowsPage(BasePage):
         }
         self.element_is_visible(buttons[button]).click()
         time.sleep(2)
+
+    def checking_transition_to_new_window(self, num_windows=2):
+        print(self.driver.window_handles)
+        self.switch_to_new_window(num_windows)
+        url = self.driver.current_url
+        self.switch_to_start_window()
+        return url
