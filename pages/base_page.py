@@ -32,9 +32,15 @@ class BasePage:
     def option_select(self, text, locator):
         select = Select(self.element_is_visible(locator))
         select.select_by_visible_text(text)
-    def action_double_click(self,element):
+
+    def action_double_click(self, element):
         action = ActionChains(self.driver)
         action.double_click(element).perform()
-    def action_right_click(self,element):
+
+    def action_right_click(self, element):
         action = ActionChains(self.driver)
         action.context_click(element).perform()
+
+    def switch_to_new_window(self, num_windows=2, timeout=5):
+        wait(self.driver, timeout).until(EC.number_of_windows_to_be(num_windows))
+        self.driver.switch_to.window(self.driver.window_handles[-1])
