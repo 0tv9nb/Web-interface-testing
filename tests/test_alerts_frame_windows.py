@@ -26,5 +26,17 @@ class TestAlerts:
         alerts_page.click_button("timer_alert_button")
         timer_alert_button_text = alerts_page.get_text_alert()
         assert timer_alert_button_text == 'This alert appeared after 5 seconds', 'text in timer_alert does not match'
-        # "confirm_button"
-        # "promt_button"
+
+    def test_promt_alert(self, driver):
+        alerts_page = AlertsPage(driver, 'https://demoqa.com/alerts')
+        alerts_page.open()
+        alerts_page.click_button("confirm_button")
+        alerts_page.accept_or_close_alert('Ok')
+        message_ok = alerts_page.get_message_from_alert('confirm_btn_msg')
+        assert message_ok == 'Ok', 'confirmation failed'
+        alerts_page.click_button("confirm_button")
+        alerts_page.accept_or_close_alert('Cancel')
+        message_cancel = alerts_page.get_message_from_alert('confirm_btn_msg')
+        assert message_cancel == 'Cancel', "alert didn't close"
+
+
