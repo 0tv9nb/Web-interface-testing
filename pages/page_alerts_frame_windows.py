@@ -2,7 +2,7 @@ import time
 
 from generator.generator import generated_data
 from pages.base_page import BasePage
-from locators.locators_page_alerts_frame_windows import BrowserWindowsLocators, AlertsLocators
+from locators.locators_page_alerts_frame_windows import BrowserWindowsLocators, AlertsLocators, FramesLocators
 
 
 class BrowserWindowsPage(BasePage):
@@ -63,3 +63,20 @@ class AlertsPage(BasePage):
         alert.send_keys(name)
         alert.accept()
         return name
+
+
+class FramesPage(BasePage):
+    locator = FramesLocators()
+
+    def jump_to_frame(self, frame):
+        frames = {
+            "big_frame": self.locator.BIG_FRAME,
+            "smol_frame": self.locator.SMOL_FRAME,
+        }
+        frame_switch = self.element_is_visible(frames[frame])
+        frame_height = frame_switch.get_attribute('height')
+        frame_width = frame_switch.get_attribute('width')
+        self.switch_to_frame(frame_switch)
+        frame_text = self.element_is_visible(self.locator.FRAME_TEXT).text
+        self.switch_to_start_window()
+        return [frame_text, frame_width, frame_height]

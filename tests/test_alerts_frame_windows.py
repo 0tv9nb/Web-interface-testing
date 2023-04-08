@@ -1,4 +1,4 @@
-from pages.page_alerts_frame_windows import BrowserWindowsPage, AlertsPage
+from pages.page_alerts_frame_windows import BrowserWindowsPage, AlertsPage, FramesPage
 
 
 class TestBrowserWindows:
@@ -46,3 +46,13 @@ class TestAlerts:
         name_in = alerts_page.checking_prompt_alert()
         name_out = alerts_page.get_message_from_alert('promt_btn_msg')
         assert name_out == name_in, 'name does not match'
+
+
+class TestFrames:
+    def test_frame(self, driver):
+        frame_page = FramesPage(driver, 'https://demoqa.com/frames')
+        frame_page.open()
+        frame_data = frame_page.jump_to_frame('big_frame')
+        assert frame_data == ['This is a sample page', '500px', '350px'], 'switch to big frame failed'
+        frame_data = frame_page.jump_to_frame('smol_frame')
+        assert frame_data == ['This is a sample page', '100px', '100px'], 'switch to smol frame failed'
