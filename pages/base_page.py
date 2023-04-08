@@ -48,8 +48,8 @@ class BasePage:
     def switch_to_start_window(self):
         self.driver.switch_to.window(self.driver.window_handles[0])
 
-    def url_comparison(self,url, timeout=5):
+    def url_comparison(self, url, timeout=5):
         return wait(self.driver, timeout).until(EC.url_to_be(url))
 
-    def switch_to_alert(self,timeout=5):
+    def switch_to_alert(self, timeout=5):
         return wait(self.driver, timeout).until(EC.alert_is_present())
