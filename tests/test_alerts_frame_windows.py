@@ -39,4 +39,10 @@ class TestAlerts:
         message_cancel = alerts_page.get_message_from_alert('confirm_btn_msg')
         assert message_cancel == 'Cancel', "alert didn't close"
 
-
+    def test_confirm_alert(self, driver):
+        alerts_page = AlertsPage(driver, 'https://demoqa.com/alerts')
+        alerts_page.open()
+        alerts_page.click_button("promt_button")
+        name_in = alerts_page.checking_prompt_alert()
+        name_out = alerts_page.get_message_from_alert('promt_btn_msg')
+        assert name_out == name_in, 'name does not match'

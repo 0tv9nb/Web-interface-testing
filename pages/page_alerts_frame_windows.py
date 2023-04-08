@@ -57,4 +57,9 @@ class AlertsPage(BasePage):
         }
         return self.element_is_visible(messages[message]).text.split(' ')[-1]
 
-
+    def checking_prompt_alert(self):
+        name = next(generated_data()).first_name
+        alert = self.switch_to_alert()
+        alert.send_keys(name)
+        alert.accept()
+        return name
