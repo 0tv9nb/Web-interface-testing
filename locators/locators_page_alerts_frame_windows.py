@@ -17,3 +17,19 @@ class AlertsLocators:
     # message
     CONFIRM_BUTTON_MESSAGE = (By.CSS_SELECTOR, "span[id = 'confirmResult']")
     PROMT_BUTTON_MESSAGE = (By.CSS_SELECTOR, "span[id = 'promptResult']")
+
+
+class FramesLocators:
+    # frames
+    BIG_FRAME = (By.CSS_SELECTOR, "iframe[id='frame1']")
+    SMOL_FRAME = (By.CSS_SELECTOR, "iframe[id='frame2']")
+    # text
+    FRAME_TEXT = (By.CSS_SELECTOR, "h1[id='sampleHeading']")
+
+
+class NestedFramesLocators:
+    # frames
+    OUTER_FRAME = (By.CSS_SELECTOR, "iframe[id='frame1']")
+    INNER_FRAME = (By.CSS_SELECTOR, "iframe")
+    # text
+    FRAME_TEXT = (By.CSS_SELECTOR, "body")

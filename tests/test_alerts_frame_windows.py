@@ -1,4 +1,4 @@
-from pages.page_alerts_frame_windows import BrowserWindowsPage, AlertsPage
+from pages.page_alerts_frame_windows import BrowserWindowsPage, AlertsPage, FramesPage, NestedFramesPage
 
 
 class TestBrowserWindows:
@@ -46,3 +46,25 @@ class TestAlerts:
         name_in = alerts_page.checking_prompt_alert()
         name_out = alerts_page.get_message_from_alert('promt_btn_msg')
         assert name_out == name_in, 'name does not match'
+
+
+class TestFrames:
+    def test_frame(self, driver):
+        frame_page = FramesPage(driver, 'https://demoqa.com/frames')
+        frame_page.open()
+        big_frame_data = frame_page.jump_to_frame('big_frame')
+        assert big_frame_data == ['This is a sample page', '500px', '350px'], 'switch to big frame failed'
+        smol_frame_data = frame_page.jump_to_frame('smol_frame')
+        assert smol_frame_data == ['This is a sample page', '100px', '100px'], 'switch to smol frame failed'
+
+
+class TestNestedFrames:
+    def test_nested_frame(self, driver):
+        nested_frame_page = NestedFramesPage(driver, 'https://demoqa.com/nestedframes')
+        nested_frame_page.open()
+        nested_frame_page.move_to_frame("outer_frame")
+        outer_frame_text = nested_frame_page.get_text_frame()
+        assert outer_frame_text == 'Parent frame', 'jump to outer frame failed'
+        nested_frame_page.move_to_frame("inner_frame")
+        inner_frame_text = nested_frame_page.get_text_frame()
+        assert inner_frame_text == 'Child Iframe', 'jump to inner frame failed'

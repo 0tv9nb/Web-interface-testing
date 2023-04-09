@@ -53,3 +53,5 @@ class BasePage:
 
     def switch_to_alert(self, timeout=5):
         return wait(self.driver, timeout).until(EC.alert_is_present())
+    def switch_to_frame(self, locator, timeout=5):
+        wait(self.driver, timeout).until(EC.frame_to_be_available_and_switch_to_it(locator))
