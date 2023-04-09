@@ -1,4 +1,5 @@
-from pages.page_alerts_frame_windows import BrowserWindowsPage, AlertsPage, FramesPage, NestedFramesPage
+from pages.page_alerts_frame_windows import BrowserWindowsPage, AlertsPage, FramesPage, NestedFramesPage, \
+    ModalDialogsPage
 
 
 class TestBrowserWindows:
@@ -68,3 +69,13 @@ class TestNestedFrames:
         nested_frame_page.move_to_frame("inner_frame")
         inner_frame_text = nested_frame_page.get_text_frame()
         assert inner_frame_text == 'Child Iframe', 'jump to inner frame failed'
+
+
+class TestModalDialogs:
+    def test_modal_dialog(self, driver):
+        modal_dialog_page = ModalDialogsPage(driver, 'https://demoqa.com/modal-dialogs')
+        modal_dialog_page.open()
+        small_data = modal_dialog_page.checking_small_module()
+        large_data = modal_dialog_page.checking_large_module()
+        assert small_data[0] == 'Small Modal' and small_data[1] > 0,'small modal it works incorrectly'
+        assert large_data[0] == 'Large Modal' and large_data[1] > 0,'large modal it works incorrectly'
