@@ -2,7 +2,8 @@ import time
 
 from generator.generator import generated_data
 from pages.base_page import BasePage
-from locators.locators_page_alerts_frame_windows import BrowserWindowsLocators, AlertsLocators, FramesLocators
+from locators.locators_page_alerts_frame_windows import BrowserWindowsLocators, AlertsLocators, FramesLocators, \
+    NestedFramesLocators
 
 
 class BrowserWindowsPage(BasePage):
@@ -80,3 +81,19 @@ class FramesPage(BasePage):
         frame_text = self.element_is_visible(self.locator.FRAME_TEXT).text
         self.switch_to_start_window()
         return [frame_text, frame_width, frame_height]
+
+
+class NestedFramesPage(BasePage):
+    locator = NestedFramesLocators()
+
+    def move_to_frame(self, frame):
+        frames = {
+            "outer_frame": self.locator.OUTER_FRAME,
+            "inner_frame": self.locator.INNER_FRAME,
+        }
+        frame_switch = self.element_is_visible(frames[frame])
+        self.switch_to_frame(frame_switch)
+
+    def get_text_frame(self):
+        frame_text = self.element_is_visible(self.locator.FRAME_TEXT).text
+        return frame_text

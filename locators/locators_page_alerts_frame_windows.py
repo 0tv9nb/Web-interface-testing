@@ -25,3 +25,11 @@ class FramesLocators:
     SMOL_FRAME = (By.CSS_SELECTOR, "iframe[id='frame2']")
     # text
     FRAME_TEXT = (By.CSS_SELECTOR, "h1[id='sampleHeading']")
+
+
+class NestedFramesLocators:
+    # frames
+    OUTER_FRAME = (By.CSS_SELECTOR, "iframe[id='frame1']")
+    INNER_FRAME = (By.CSS_SELECTOR, "iframe")
+    # text
+    FRAME_TEXT = (By.CSS_SELECTOR, "body")
