@@ -12,3 +12,8 @@ class DataToFill:
     age: int = None
     salary: int = None
     department: str = None
+
+
+@dataclass
+class DataToColor:
+    color: str = None

@@ -1,6 +1,6 @@
 from random import random
 
-from data.data import DataToFill
+from data.data import DataToFill, DataToColor
 from faker import Faker
 import random
 
@@ -21,4 +21,11 @@ def generated_data():
         age=random.randint(14, 100),
         salary=random.randint(1000, 100000),
         department=faker_ru.job(),
+    )
+
+
+def generated_color(k=1):
+    colors = ["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"]
+    yield DataToColor(
+        color=random.sample(colors, k)
     )
