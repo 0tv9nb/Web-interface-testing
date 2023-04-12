@@ -24,8 +24,7 @@ def generated_data():
     )
 
 
-def generated_color(k=1):
-    colors = ["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"]
+def generated_color(colors, k=1):
     yield DataToColor(
         color=random.sample(colors, k)
     )
