@@ -17,5 +17,9 @@ class TestWidgets:
         def test_element_addition(self, driver):
             auto_complete_pege = AutoCompletePage(driver, 'https://demoqa.com/auto-complete')
             auto_complete_pege.open()
-            auto_complete_pege.color_input('multiple', 11)
-            auto_complete_pege.color_input('single')
+            colors_in = auto_complete_pege.color_input('multiple', 3)
+            colors_out = auto_complete_pege.checking_entered_colors('multiple')
+            assert colors_in == colors_out, 'input error in multiple color'
+            color_in = auto_complete_pege.color_input('single')
+            color_out = auto_complete_pege.checking_entered_colors('single')
+            assert color_in == color_out, 'input error in single color'

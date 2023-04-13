@@ -13,6 +13,9 @@ class AccordianLocators:
 
 
 class AutoCompleteLocators:
-    # input
+    # inputs
     MULTIPLE_COLOR_INPUT = (By.CSS_SELECTOR, "input[id='autoCompleteMultipleInput']")
     SINGLE_COLOR_INPUT = (By.CSS_SELECTOR, "input[id='autoCompleteSingleInput']")
+    # colors
+    ENTERED_MULTI_COLOR = (By.CSS_SELECTOR, "div[class='css-12jo7m5 auto-complete__multi-value__label']")
+    ENTERED_SINGLE_COLOR = (By.CSS_SELECTOR, "div[class='auto-complete__single-value css-1uccc91-singleValue']")
