@@ -51,5 +51,7 @@ class AutoCompletePage(BasePage):
         colors = gen_color.color
         multi_input = self.element_is_clickable(inputs[in_type])
         for color in colors:
-            multi_input.send_keys(color)
+            multi_input.send_keys(color[:2])
+            time.sleep(1)
             multi_input.send_keys(Keys.ENTER)
+
