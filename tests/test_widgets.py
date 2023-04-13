@@ -1,4 +1,4 @@
-from pages.page_widgets import AccordianPage
+from pages.page_widgets import AccordianPage, AutoCompletePage
 
 
 class TestWidgets:
@@ -12,3 +12,10 @@ class TestWidgets:
             assert text_second[0] == 'Where does it come from?' and text_second[1] > 0, 'error in second section'
             text_third = accordian_page.checking_section_accordion('third')
             assert text_third[0] == 'Why do we use it?' and text_third[1] > 0, 'error in third section'
+
+    class TestAutoComplete:
+        def test_element_addition(self, driver):
+            auto_complete_pege = AutoCompletePage(driver, 'https://demoqa.com/auto-complete')
+            auto_complete_pege.open()
+            auto_complete_pege.color_input('multiple', 11)
+            auto_complete_pege.color_input('single')
