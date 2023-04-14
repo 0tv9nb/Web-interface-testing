@@ -1,6 +1,6 @@
 import time
 
-from selenium.common import TimeoutException
+from selenium.common import TimeoutException, ElementNotInteractableException
 from selenium.webdriver import Keys
 
 from generator.generator import generated_color
@@ -60,8 +60,15 @@ class AutoCompletePage(BasePage):
             'multiple': self.locator.ENTERED_MULTI_COLOR,
             'single': self.locator.ENTERED_SINGLE_COLOR
         }
-        colors = self.element_are_visible(output_values[in_type])
         colors_list = []
+        try:
+            colors = self.element_are_visible(output_values[in_type])
+        except TimeoutException:
+            return colors_list
         for color in colors:
             colors_list.append(color.text)
         return colors_list
+
+    def remove_colors(self, in_type):
+        remove_buttons = self.element_are_presents(self.locator.REMOVE_BUTTON)
+        remove_buttons[in_type].click()

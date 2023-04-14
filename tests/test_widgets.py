@@ -23,3 +23,15 @@ class TestWidgets:
             color_in = auto_complete_pege.color_input('single')
             color_out = auto_complete_pege.checking_entered_colors('single')
             assert color_in == color_out, 'input error in single color'
+
+        def test_cleansing_entire_field(self, driver):
+            auto_complete_pege = AutoCompletePage(driver, 'https://demoqa.com/auto-complete')
+            auto_complete_pege.open()
+            auto_complete_pege.color_input('multiple', 3)
+            auto_complete_pege.remove_colors(0)
+            colors_out = auto_complete_pege.checking_entered_colors('multiple')
+            assert len(colors_out) == 0, 'multiple input field not cleared'
+            auto_complete_pege.color_input('single')
+            # auto_complete_pege.remove_colors(1)
+            colors_out = auto_complete_pege.checking_entered_colors('single')
+            assert len(colors_out) == 0, 'single input field not cleared'

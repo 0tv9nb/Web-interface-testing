@@ -19,3 +19,4 @@ class AutoCompleteLocators:
     # colors
     ENTERED_MULTI_COLOR = (By.CSS_SELECTOR, "div[class='css-12jo7m5 auto-complete__multi-value__label']")
     ENTERED_SINGLE_COLOR = (By.CSS_SELECTOR, "div[class='auto-complete__single-value css-1uccc91-singleValue']")
+    REMOVE_BUTTON = (By.CSS_SELECTOR, "div[class='auto-complete__indicators css-1wy0on6']")
