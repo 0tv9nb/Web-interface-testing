@@ -1,6 +1,6 @@
 import time
 
-from selenium.common import TimeoutException, ElementNotInteractableException
+from selenium.common import TimeoutException
 from selenium.webdriver import Keys
 
 from generator.generator import generated_color
@@ -69,6 +69,12 @@ class AutoCompletePage(BasePage):
             colors_list.append(color.text)
         return colors_list
 
-    def remove_colors(self, in_type):
+    def clear_input_field(self, in_type):
         remove_buttons = self.element_are_presents(self.locator.REMOVE_BUTTON)
         remove_buttons[in_type].click()
+
+    def remove_color(self):
+        colors = self.element_are_visible(self.locator.REMOVE_COLOR)
+        for color in colors:
+            color.click()
+            break

@@ -28,10 +28,19 @@ class TestWidgets:
             auto_complete_pege = AutoCompletePage(driver, 'https://demoqa.com/auto-complete')
             auto_complete_pege.open()
             auto_complete_pege.color_input('multiple', 3)
-            auto_complete_pege.remove_colors(0)
+            auto_complete_pege.clear_input_field(0)
             colors_out = auto_complete_pege.checking_entered_colors('multiple')
             assert len(colors_out) == 0, 'multiple input field not cleared'
             auto_complete_pege.color_input('single')
-            # auto_complete_pege.remove_colors(1)
+            auto_complete_pege.clear_input_field(1)
             colors_out = auto_complete_pege.checking_entered_colors('single')
             assert len(colors_out) == 0, 'single input field not cleared'
+
+        def test_removing_individual_color(self, driver):
+            auto_complete_pege = AutoCompletePage(driver, 'https://demoqa.com/auto-complete')
+            auto_complete_pege.open()
+            auto_complete_pege.color_input('multiple', 3)
+            before_out = auto_complete_pege.checking_entered_colors('multiple')
+            auto_complete_pege.remove_color()
+            after_out = auto_complete_pege.checking_entered_colors('multiple')
+            assert len(before_out) == len(after_out) + 1, 'color not removed'
