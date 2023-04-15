@@ -84,16 +84,21 @@ class AutoCompletePage(BasePage):
 class DatePickerPage(BasePage):
     locator = DatePickerLocators()
 
-    def getting_date(self):
-        get_data = self.element_is_presents(self.locator.SELECT_DATA_INPUT).get_attribute('value')
+    def getting_date(self, element):
+        elements = {
+            'date': self.locator.SELECT_DATE_INPUT,
+            'date_time': self.locator.DATE_AND_TIME
+        }
+        get_data = self.element_is_presents(elements[element]).get_attribute('value')
         return get_data
 
     def current_date(self):
-        date = datetime.now()
-        month = date.month
-        if month < 10:
-            month = f'0{month}'
-        day = date.day
-        if day < 10:
-            day = f'0{day}'
-        return f'{month}/{day}/{date.year}'
+        now = datetime.now()
+        return now.strftime('%m/%d/%Y')
+
+    def current_date_with_time(self):
+        now = datetime.now()
+        hour = now.strftime(f'%I')
+        if int(hour) < 10:
+            hour = hour.replace('0', '')
+        return f"{now.strftime(f'%B %d, %Y ')}{hour}"

@@ -25,5 +25,5 @@ class AutoCompleteLocators:
 
 class DatePickerLocators:
     # input
-    SELECT_DATA_INPUT = (By.CSS_SELECTOR, "input[id='datePickerMonthYearInput']")
+    SELECT_DATE_INPUT = (By.CSS_SELECTOR, "input[id='datePickerMonthYearInput']")
     DATE_AND_TIME = (By.CSS_SELECTOR, "input[id='dateAndTimePickerInput']")

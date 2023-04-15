@@ -50,5 +50,8 @@ class TestWidgets:
             date_picker_page = DatePickerPage(driver, 'https://demoqa.com/date-picker')
             date_picker_page.open()
             current_date = date_picker_page.current_date()
-            from_site_date = date_picker_page.getting_date()
+            from_site_date = date_picker_page.getting_date('date')
             assert current_date == from_site_date, 'current date on the site is not correct'
+            from_site_date_time = date_picker_page.current_date_with_time()
+            date_and_time = date_picker_page.getting_date('date_time')
+            assert from_site_date_time in date_and_time, 'current date with time on the site is not correct'
