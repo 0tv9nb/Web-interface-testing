@@ -1,10 +1,11 @@
 import time
+from datetime import datetime
 
 from selenium.common import TimeoutException
 from selenium.webdriver import Keys
 
 from generator.generator import generated_color
-from locators.locators_page_widgets import AccordianLocators, AutoCompleteLocators
+from locators.locators_page_widgets import AccordianLocators, AutoCompleteLocators, DatePickerLocators
 from pages.base_page import BasePage
 
 
@@ -78,3 +79,21 @@ class AutoCompletePage(BasePage):
         for color in colors:
             color.click()
             break
+
+
+class DatePickerPage(BasePage):
+    locator = DatePickerLocators()
+
+    def getting_date(self):
+        get_data = self.element_is_presents(self.locator.SELECT_DATA_INPUT).get_attribute('value')
+        return get_data
+
+    def current_date(self):
+        date = datetime.now()
+        month = date.month
+        if month < 10:
+            month = f'0{month}'
+        day = date.day
+        if day < 10:
+            day = f'0{day}'
+        return f'{month}/{day}/{date.year}'

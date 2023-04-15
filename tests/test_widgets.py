@@ -1,4 +1,4 @@
-from pages.page_widgets import AccordianPage, AutoCompletePage
+from pages.page_widgets import AccordianPage, AutoCompletePage, DatePickerPage
 
 
 class TestWidgets:
@@ -44,3 +44,11 @@ class TestWidgets:
             auto_complete_pege.remove_color()
             after_out = auto_complete_pege.checking_entered_colors('multiple')
             assert len(before_out) == len(after_out) + 1, 'color not removed'
+
+    class TestDatePicker:
+        def test_checking_current_date(self, driver):
+            date_picker_page = DatePickerPage(driver, 'https://demoqa.com/date-picker')
+            date_picker_page.open()
+            current_date = date_picker_page.current_date()
+            from_site_date = date_picker_page.getting_date()
+            assert current_date == from_site_date, 'current date on the site is not correct'
