@@ -45,9 +45,13 @@ def generated_date():
              81: '20:15', 82: '20:30', 83: '20:45', 84: '21:00', 85: '21:15', 86: '21:30', 87: '21:45', 88: '22:00',
              89: '22:15', 90: '22:30', 91: '22:45', 92: '23:00', 93: '23:15', 94: '23:30', 95: '23:45'}
     rand = random.randint(1, 96)
+    random_date=faker_en.date_time()
     yield DataToDate(
-        year=faker_en.year(),
-        month=faker_en.month_name(),
-        day=faker_en.day_of_month(),
+        # year=faker_en.year(),
+        # month=faker_en.month_name(),
+        # day=faker_en.day_of_month(),
+        year=random_date.day,
+        month=random_date.month,
+        day=random_date.year,
         tim=[times[rand], rand]
     )
