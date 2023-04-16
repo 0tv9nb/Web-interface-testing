@@ -24,4 +24,5 @@ class DataToDate:
     year: str = None
     month: str = None
     day: str = None
+    tim: list = None
 
