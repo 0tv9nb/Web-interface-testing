@@ -1,11 +1,11 @@
 from random import random
 
-from data.data import DataToFill, DataToColor
+from data.data import DataToFill, DataToColor, DataToDate
 from faker import Faker
 import random
 
 faker_ru = Faker('ru_RU')  # to generate Russian text
-
+faker_en=Faker('En')
 
 # Faker.seed()
 
@@ -27,4 +27,10 @@ def generated_data():
 def generated_color(colors, k=1):
     yield DataToColor(
         color=random.sample(colors, k)
+    )
+def generated_date():
+    yield DataToDate(
+        year=faker_en.year(),
+        month=faker_en.month_name(),
+        day=faker_en.day_of_month(),
     )

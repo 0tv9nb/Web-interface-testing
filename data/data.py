@@ -17,3 +17,11 @@ class DataToFill:
 @dataclass
 class DataToColor:
     color: str = None
+
+
+@dataclass
+class DataToDate:
+    year: str = None
+    month: str = None
+    day: str = None
+
