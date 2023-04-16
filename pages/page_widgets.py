@@ -4,7 +4,7 @@ from datetime import datetime
 from selenium.common import TimeoutException
 from selenium.webdriver import Keys
 
-from generator.generator import generated_color
+from generator.generator import generated_color, generated_date
 from locators.locators_page_widgets import AccordianLocators, AutoCompleteLocators, DatePickerLocators
 from pages.base_page import BasePage
 
@@ -104,17 +104,18 @@ class DatePickerPage(BasePage):
         return f"{now.strftime(f'%B %d, %Y ')}{hour}"
 
     def data_entry_in_select_date(self):
-        day = 29
-        month = 'May'
-        year = '2022'
+        gen_date = next(generated_date())
+        year = gen_date.year
+        day = gen_date.day
+        month = gen_date.month
         self.element_is_visible(self.locator.SELECT_DATE_INPUT).click()
         self.option_select(month, self.locator.SELECT_DATE_MONTH)
         time.sleep(3)
         self.option_select(year, self.locator.SELECT_DATE_YEAR)
         time.sleep(3)
-        locat = (
+        locats = (
             "css selector", f"div[class^='react-datepicker__day react-datepicker__day--0{day}'][aria-label~='{month}']")
-        self.element_is_visible(locat).click()
+        self.element_is_visible(locats).click()
         time.sleep(3)
         month = self.convert_month_to_number(month)
         return f'{month}/{day}/{year}'
