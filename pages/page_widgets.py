@@ -87,7 +87,7 @@ class DatePickerPage(BasePage):
     def getting_date(self, element):
         elements = {
             'date': self.locator.SELECT_DATE_INPUT,
-            'date_time': self.locator.DATE_AND_TIME
+            'date_time': self.locator.DATE_AND_TIME_INPUT
         }
         get_data = self.element_is_presents(elements[element]).get_attribute('value')
         return get_data
@@ -108,15 +108,13 @@ class DatePickerPage(BasePage):
         year = gen_date.year
         day = gen_date.day
         month = gen_date.month
+        print(year, month, day)
         self.element_is_visible(self.locator.SELECT_DATE_INPUT).click()
         self.option_select(month, self.locator.SELECT_DATE_MONTH)
-        time.sleep(3)
         self.option_select(year, self.locator.SELECT_DATE_YEAR)
-        time.sleep(3)
         locats = (
             "css selector", f"div[class^='react-datepicker__day react-datepicker__day--0{day}'][aria-label~='{month}']")
         self.element_is_visible(locats).click()
-        time.sleep(3)
         month = self.convert_month_to_number(month)
         return f'{month}/{day}/{year}'
 
@@ -137,3 +135,24 @@ class DatePickerPage(BasePage):
             "December": '12',
         }
         return months[month]
+
+    def date_and_time_change(self):
+        gen_date = next(generated_date())
+        year = '2027'
+        day = gen_date.day
+        month = gen_date.month
+        month_int = int(self.convert_month_to_number(month))
+        locats = (
+            "css selector", f"div[class^='react-datepicker__day react-datepicker__day--0{day}'][aria-label~='{month}']")
+        print(locats)
+        self.element_is_visible(self.locator.DATE_AND_TIME_INPUT).click()
+        self.element_is_visible(self.locator.DATE_AND_MONTH).click()
+        months = self.element_are_presents(self.locator.DATE_AND_MONTH_ITEM)
+        months[month_int - 1].click()
+        self.element_is_visible(self.locator.DATE_AND_YEAR).click()
+        years = self.element_are_visible(self.locator.DATE_AND_YEAR_ITEM)
+        years[2].click()
+        self.element_is_visible(locats).click()
+        times = self.element_are_presents(self.locator.DATE_AND_TIME_ITEM)
+        times[87].click()
+        return f'{month} {day}, {year}'
