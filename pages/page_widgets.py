@@ -102,3 +102,37 @@ class DatePickerPage(BasePage):
         if int(hour) < 10:
             hour = hour.replace('0', '')
         return f"{now.strftime(f'%B %d, %Y ')}{hour}"
+
+    def data_entry_in_select_date(self):
+        day = 29
+        month = 'May'
+        year = '2022'
+        self.element_is_visible(self.locator.SELECT_DATE_INPUT).click()
+        self.option_select(month, self.locator.SELECT_DATE_MONTH)
+        time.sleep(3)
+        self.option_select(year, self.locator.SELECT_DATE_YEAR)
+        time.sleep(3)
+        locat = (
+            "css selector", f"div[class^='react-datepicker__day react-datepicker__day--0{day}'][aria-label~='{month}']")
+        self.element_is_visible(locat).click()
+        time.sleep(3)
+        month = self.convert_month_to_number(month)
+        return f'{month}/{day}/{year}'
+
+    @staticmethod
+    def convert_month_to_number(month):
+        months = {
+            "January": '01',
+            "February": '02',
+            "March": '03',
+            "April": '04',
+            "May": '05',
+            "June": '06',
+            "July": '07',
+            "August": '08',
+            "September": '09',
+            "October": '10',
+            "November": '11',
+            "December": '12',
+        }
+        return months[month]
