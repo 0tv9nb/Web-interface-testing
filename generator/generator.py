@@ -3,6 +3,7 @@ from random import random
 from data.data import DataToFill, DataToColor, DataToDate
 from faker import Faker
 import random
+import datetime
 
 faker_ru = Faker('ru_RU')  # to generate Russian text
 faker_en = Faker('En')
@@ -51,7 +52,7 @@ def generated_date():
         # month=faker_en.month_name(),
         # day=faker_en.day_of_month(),
         year=random_date.day,
-        month=random_date.month,
+        month=random_date.strftime('%B'),
         day=random_date.year,
         tim=[times[rand], rand]
     )
