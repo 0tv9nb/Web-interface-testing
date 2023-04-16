@@ -29,4 +29,12 @@ class DatePickerLocators:
     SELECT_DATE_MONTH = (By.CSS_SELECTOR, "select[class='react-datepicker__month-select']")
     SELECT_DATE_YEAR = (By.CSS_SELECTOR, "select[class='react-datepicker__year-select']")
     # time
-    DATE_AND_TIME = (By.CSS_SELECTOR, "input[id='dateAndTimePickerInput']")
+    DATE_AND_TIME_INPUT = (By.CSS_SELECTOR, "input[id='dateAndTimePickerInput']")
+    DATE_AND_MONTH = (By.CSS_SELECTOR, "div[class='react-datepicker__month-read-view']")
+    # DATE_AND_MONTH_ITEM = (By.CSS_SELECTOR, "div[class='react-datepicker__month-option']")
+    DATE_AND_MONTH_ITEM = (By.CSS_SELECTOR, "div[class^='react-datepicker__month-option']")
+    DATE_AND_YEAR = (By.CSS_SELECTOR, "div[class='react-datepicker__year-read-view']")
+    # DATE_AND_YEAR_ITEM = (By.CSS_SELECTOR, "div[class='react-datepicker__year-option']")
+    DATE_AND_YEAR_ITEM = (By.CSS_SELECTOR, "div[class^='react-datepicker__year-option']")
+    # DATE_AND_TIME_ITEM = (By.CSS_SELECTOR, "li[class='react-datepicker__time-list-item '] ")
+    DATE_AND_TIME_ITEM = (By.CSS_SELECTOR, "li[class='react-datepicker__time-list-item '] ")

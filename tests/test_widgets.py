@@ -68,5 +68,4 @@ class TestWidgets:
             date_picker_page.open()
             date_in = date_picker_page.date_and_time_change()
             date_out = date_picker_page.getting_date('date_time')
-            print(date_in)
-            print(date_out)
+            assert date_out == date_in, "entered date and time did not match"

@@ -141,10 +141,11 @@ class DatePickerPage(BasePage):
         year = '2027'
         day = gen_date.day
         month = gen_date.month
+        tim = gen_date.tim[0]
+        tim_int = gen_date.tim[1]
         month_int = int(self.convert_month_to_number(month))
         locats = (
             "css selector", f"div[class^='react-datepicker__day react-datepicker__day--0{day}'][aria-label~='{month}']")
-        print(locats)
         self.element_is_visible(self.locator.DATE_AND_TIME_INPUT).click()
         self.element_is_visible(self.locator.DATE_AND_MONTH).click()
         months = self.element_are_presents(self.locator.DATE_AND_MONTH_ITEM)
@@ -154,5 +155,7 @@ class DatePickerPage(BasePage):
         years[2].click()
         self.element_is_visible(locats).click()
         times = self.element_are_presents(self.locator.DATE_AND_TIME_ITEM)
-        times[87].click()
-        return f'{month} {day}, {year}'
+        times[tim_int].click()
+        date_tim = datetime.strptime(f'{tim}', '%H:%M')
+        hours, minute = date_tim.strftime('%I:%M %p').split(':')
+        return f'{month} {int(day)}, {year} {int(hours)}:{minute}'
