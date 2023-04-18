@@ -126,7 +126,7 @@ class DatePickerPage(BasePage):
 
     def date_and_time_change(self):
         gen_date = next(generated_date())
-        year = '2027'
+        year = gen_date.year
         day = gen_date.day
         month = gen_date.month
         tim_str = gen_date.tim[0]
@@ -140,10 +140,28 @@ class DatePickerPage(BasePage):
         months[month_int - 1].click()
         self.element_is_visible(self.locator.DATE_AND_YEAR).click()
         years = self.element_are_visible(self.locator.DATE_AND_YEAR_ITEM)
-        years[2].click()
+        # years[2].click()
+        self.year_selection(year)
         self.element_is_visible(locats).click()
         times = self.element_are_presents(self.locator.DATE_AND_TIME_ITEM)
         times[tim_int].click()
         date_tim = datetime.strptime(f'{tim_str}', '%H:%M')
         hours, minute = date_tim.strftime('%I:%M %p').split(':')
         return f'{month} {int(day)}, {year} {int(hours)}:{minute}'
+
+    def year_selection(self, year):
+        year = int(year)
+        print(year)
+        if year > 2028:
+            for i in range(year - 2028):
+                self.element_is_visible(self.locator.DATE_AND_YEAR_ITEM_UP).click()
+            self.element_is_visible(
+                ("css selector", f"div[class='react-datepicker__year-option']:nth-child(2)")).click()
+        elif year < 2018:
+            for i in range(2018 - year):
+                self.element_is_visible(self.locator.DATE_AND_YEAR_ITEM_DOWN).click()
+            self.element_is_visible(
+                ("css selector", f"div[class='react-datepicker__year-option']:nth-child(12)")).click()
+        else:
+            self.element_is_visible(
+                ("css selector", f"div[class='react-datepicker__year-option']:nth-child({2030 - year})")).click()

@@ -35,3 +35,5 @@ class DatePickerLocators:
     DATE_AND_YEAR = (By.CSS_SELECTOR, "div[class='react-datepicker__year-read-view']")
     DATE_AND_YEAR_ITEM = (By.CSS_SELECTOR, "div[class^='react-datepicker__year-option']")
     DATE_AND_TIME_ITEM = (By.CSS_SELECTOR, "li[class='react-datepicker__time-list-item '] ")
+    DATE_AND_YEAR_ITEM_UP = (By.CSS_SELECTOR, "div[class='react-datepicker__year-option']:first-child")
+    DATE_AND_YEAR_ITEM_DOWN = (By.CSS_SELECTOR, "div[class='react-datepicker__year-option']:last-child")
