@@ -120,28 +120,16 @@ class DatePickerPage(BasePage):
 
     @staticmethod
     def convert_month_to_number(month):
-        months = {
-            "January": '01',
-            "February": '02',
-            "March": '03',
-            "April": '04',
-            "May": '05',
-            "June": '06',
-            "July": '07',
-            "August": '08',
-            "September": '09',
-            "October": '10',
-            "November": '11',
-            "December": '12',
-        }
-        return months[month]
+        date_month = datetime.strptime(month, '%B')
+        format_month = date_month.strftime('%m')
+        return format_month
 
     def date_and_time_change(self):
         gen_date = next(generated_date())
         year = '2027'
         day = gen_date.day
         month = gen_date.month
-        tim = gen_date.tim[0]
+        tim_str = gen_date.tim[0]
         tim_int = gen_date.tim[1]
         month_int = int(self.convert_month_to_number(month))
         locats = (
@@ -156,6 +144,6 @@ class DatePickerPage(BasePage):
         self.element_is_visible(locats).click()
         times = self.element_are_presents(self.locator.DATE_AND_TIME_ITEM)
         times[tim_int].click()
-        date_tim = datetime.strptime(f'{tim}', '%H:%M')
+        date_tim = datetime.strptime(f'{tim_str}', '%H:%M')
         hours, minute = date_tim.strftime('%I:%M %p').split(':')
         return f'{month} {int(day)}, {year} {int(hours)}:{minute}'
