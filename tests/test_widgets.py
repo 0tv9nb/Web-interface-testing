@@ -69,8 +69,10 @@ class TestWidgets:
             date_in = date_picker_page.date_and_time_change()
             date_out = date_picker_page.getting_date('date_time')
             assert date_out == date_in, "entered date and time did not match"
+
     class TestSlider:
         def test_slider(self, driver):
             slider_page = SliderPage(driver, 'https://demoqa.com/slider')
             slider_page.open()
-            slider_page.changing_slider_value()
+            before, after = slider_page.changing_slider_value()
+            assert before != after, 'slider stays in place'

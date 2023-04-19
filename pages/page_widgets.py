@@ -170,10 +170,8 @@ class SliderPage(BasePage):
     locator = SliderLocators()
 
     def changing_slider_value(self):
-        value = self.element_is_visible(self.locator.SLIDER_VALUE).get_attribute('value')
-        print(value)
-        num = random.randint(1, 100)
-        print('num=', num)
-        self.drag_element(self.locator.SLIDER_BUTTON, num)
-        value = self.element_is_visible(self.locator.SLIDER_VALUE).get_attribute('value')
-        print(value)
+        value = self.element_is_visible(self.locator.SLIDER_VALUE)
+        before = value.get_attribute('value')
+        self.drag_element(self.locator.SLIDER_BUTTON, random.randint(-330, 330))
+        after = value.get_attribute('value')
+        return before, after
