@@ -1,3 +1,4 @@
+import random
 import time
 from datetime import datetime
 
@@ -5,7 +6,7 @@ from selenium.common import TimeoutException
 from selenium.webdriver import Keys
 
 from generator.generator import generated_color, generated_date
-from locators.locators_page_widgets import AccordianLocators, AutoCompleteLocators, DatePickerLocators
+from locators.locators_page_widgets import AccordianLocators, AutoCompleteLocators, DatePickerLocators, SliderLocators
 from pages.base_page import BasePage
 
 
@@ -139,8 +140,6 @@ class DatePickerPage(BasePage):
         months = self.element_are_presents(self.locator.DATE_AND_MONTH_ITEM)
         months[month_int - 1].click()
         self.element_is_visible(self.locator.DATE_AND_YEAR).click()
-        years = self.element_are_visible(self.locator.DATE_AND_YEAR_ITEM)
-        # years[2].click()
         self.year_selection(year)
         self.element_is_visible(locats).click()
         times = self.element_are_presents(self.locator.DATE_AND_TIME_ITEM)
@@ -165,3 +164,16 @@ class DatePickerPage(BasePage):
         else:
             self.element_is_visible(
                 ("css selector", f"div[class='react-datepicker__year-option']:nth-child({2030 - year})")).click()
+
+
+class SliderPage(BasePage):
+    locator = SliderLocators()
+
+    def changing_slider_value(self):
+        value = self.element_is_visible(self.locator.SLIDER_VALUE).get_attribute('value')
+        print(value)
+        num = random.randint(1, 100)
+        print('num=', num)
+        self.drag_element(self.locator.SLIDER_BUTTON, num)
+        value = self.element_is_visible(self.locator.SLIDER_VALUE).get_attribute('value')
+        print(value)
