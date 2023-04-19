@@ -59,3 +59,8 @@ class BasePage:
 
     def element_is_clickable(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
+
+    def drag_element(self, locator, x_set, y_set=0):
+        element = self.element_is_visible(locator)
+        action = ActionChains(self.driver)
+        action.drag_and_drop_by_offset(element, x_set, y_set).perform()
