@@ -7,7 +7,7 @@ from selenium.webdriver import Keys
 
 from generator.generator import generated_color, generated_date
 from locators.locators_page_widgets import AccordianLocators, AutoCompleteLocators, DatePickerLocators, SliderLocators, \
-    ProgressBarLocators
+    ProgressBarLocators, TabsLocators
 from pages.base_page import BasePage
 
 
@@ -197,3 +197,14 @@ class ProgressBarPage(BasePage):
         self.element_is_visible(self.locator.RESET_BUTTON, 15).click()
         value = self.element_is_presents(self.locator.PROGRES_BAR_VALUE).get_attribute('aria-valuenow')
         return int(value)
+
+
+class TabsPage(BasePage):
+    locator = TabsLocators()
+
+    def working_with_tabs(self):
+        tab = self.element_is_visible(self.locator.TAB_WHAT)
+        tab.click()
+        title = tab.text
+        text = self.element_is_visible(self.locator.TAB_WHAT_TEXT).text
+        return title, len(text)

@@ -49,3 +49,15 @@ class ProgressBarLocators:
     PROGRES_BAR_BUTTON = (By.CSS_SELECTOR, "button[id='startStopButton']")
     RESET_BUTTON = (By.CSS_SELECTOR, "button[id='resetButton']")
 
+
+class TabsLocators:
+    # tab
+    TAB_WHAT = (By.CSS_SELECTOR, "a[id='demo-tab-what']")
+    TAB_USE = (By.CSS_SELECTOR, "a[id='demo-tab-use']")
+    TAB_MORE = (By.CSS_SELECTOR, "a[id='demo-tab-more']")
+    TAB_ORIGIN = (By.CSS_SELECTOR, "a[id='demo-tab-origin']")
+    # text
+    TAB_WHAT_TEXT = (By.CSS_SELECTOR, "div[id='demo-tabpane-what']")
+    TAB_USE_TEXT = (By.CSS_SELECTOR, "div[id='demo-tabpane-use']")
+    TAB_MORE_TEXT = (By.CSS_SELECTOR, "div[id='demo-tabpane-more']")
+    TAB_ORIGIN_TEXT = (By.CSS_SELECTOR, "div[id='demo-tabpane-origin']")

@@ -1,4 +1,4 @@
-from pages.page_widgets import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage
+from pages.page_widgets import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage
 
 
 class TestWidgets:
@@ -89,3 +89,10 @@ class TestWidgets:
             progress_bar_page.open()
             value = progress_bar_page.progress_bar_update()
             assert value == 0, 'progress bar not updated'
+
+    class TestTabs:
+        def test_tabs(self, driver):
+            tabs_page = TabsPage(driver, 'https://demoqa.com/tabs')
+            tabs_page.open()
+            title, text = tabs_page.working_with_tabs()
+            assert title == 'What' and text > 0, 'failed to get data from tab'
