@@ -2,11 +2,12 @@ import random
 import time
 from datetime import datetime
 
-from selenium.common import TimeoutException
+from selenium.common import TimeoutException, StaleElementReferenceException
 from selenium.webdriver import Keys
 
 from generator.generator import generated_color, generated_date
-from locators.locators_page_widgets import AccordianLocators, AutoCompleteLocators, DatePickerLocators, SliderLocators
+from locators.locators_page_widgets import AccordianLocators, AutoCompleteLocators, DatePickerLocators, SliderLocators, \
+    ProgressBarLocators
 from pages.base_page import BasePage
 
 
@@ -175,3 +176,20 @@ class SliderPage(BasePage):
         self.drag_element(self.locator.SLIDER_BUTTON, random.randint(-330, 330))
         after = value.get_attribute('value')
         return before, after
+
+
+class ProgressBarPage(BasePage):
+    locator = ProgressBarLocators()
+
+    def changing_progress_bar_value(self):
+        button = self.element_is_visible(self.locator.PROGRES_BAR_BUTTON)
+        button.click()
+        time.sleep(random.randint(0, 10))
+        try:
+            button.click()
+        except StaleElementReferenceException:
+            return 100
+        value = self.element_is_presents(self.locator.PROGRES_BAR_VALUE).get_attribute('aria-valuenow')
+        return int(value)
+
+

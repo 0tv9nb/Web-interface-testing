@@ -1,4 +1,4 @@
-from pages.page_widgets import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage
+from pages.page_widgets import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage
 
 
 class TestWidgets:
@@ -76,3 +76,13 @@ class TestWidgets:
             slider_page.open()
             before, after = slider_page.changing_slider_value()
             assert before != after, 'slider stays in place'
+
+    class TestProgressBar:
+        def test_progress_bar(self, driver):
+            progress_bar_page = ProgressBarPage(driver, 'https://demoqa.com/progress-bar')
+            progress_bar_page.open()
+            value = progress_bar_page.changing_progress_bar_value()
+            assert value > 0, "progress bar didn't move"
+
+
+

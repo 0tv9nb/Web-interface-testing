@@ -38,6 +38,14 @@ class DatePickerLocators:
     DATE_AND_YEAR_ITEM_UP = (By.CSS_SELECTOR, "div[class='react-datepicker__year-option']:first-child")
     DATE_AND_YEAR_ITEM_DOWN = (By.CSS_SELECTOR, "div[class='react-datepicker__year-option']:last-child")
 
+
 class SliderLocators:
-    SLIDER_VALUE=(By.CSS_SELECTOR, "input[id='sliderValue']")
-    SLIDER_BUTTON=(By.CSS_SELECTOR, "input[class='range-slider range-slider--primary']")
+    SLIDER_VALUE = (By.CSS_SELECTOR, "input[id='sliderValue']")
+    SLIDER_BUTTON = (By.CSS_SELECTOR, "input[class='range-slider range-slider--primary']")
+
+
+class ProgressBarLocators:
+    PROGRES_BAR_VALUE = (By.CSS_SELECTOR, "div[class='progress-bar bg-info']")
+    PROGRES_BAR_BUTTON = (By.CSS_SELECTOR, "button[id='startStopButton']")
+    RESET_BUTTON = (By.CSS_SELECTOR, "button[id='resetButton']")
+
