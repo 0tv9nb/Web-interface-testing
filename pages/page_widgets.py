@@ -192,4 +192,8 @@ class ProgressBarPage(BasePage):
         value = self.element_is_presents(self.locator.PROGRES_BAR_VALUE).get_attribute('aria-valuenow')
         return int(value)
 
-
+    def progress_bar_update(self):
+        self.element_is_visible(self.locator.PROGRES_BAR_BUTTON).click()
+        self.element_is_visible(self.locator.RESET_BUTTON, 15).click()
+        value = self.element_is_presents(self.locator.PROGRES_BAR_VALUE).get_attribute('aria-valuenow')
+        return int(value)

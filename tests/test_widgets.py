@@ -84,5 +84,8 @@ class TestWidgets:
             value = progress_bar_page.changing_progress_bar_value()
             assert value > 0, "progress bar didn't move"
 
-
-
+        def test_reset_function(self, driver):
+            progress_bar_page = ProgressBarPage(driver, 'https://demoqa.com/progress-bar')
+            progress_bar_page.open()
+            value = progress_bar_page.progress_bar_update()
+            assert value == 0, 'progress bar not updated'
