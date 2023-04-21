@@ -94,5 +94,11 @@ class TestWidgets:
         def test_tabs(self, driver):
             tabs_page = TabsPage(driver, 'https://demoqa.com/tabs')
             tabs_page.open()
-            title, text = tabs_page.working_with_tabs()
+            title, text = tabs_page.working_with_tabs('what')
             assert title == 'What' and text > 0, 'failed to get data from tab'
+            title, text = tabs_page.working_with_tabs('use')
+            assert title == 'Use' and text > 0, 'failed to get data from tab'
+            title, text = tabs_page.working_with_tabs('origin')
+            assert title == 'Origin' and text > 0, 'failed to get data from tab'
+            title, text = tabs_page.working_with_tabs('more')
+            assert title == 'More' and text > 0, 'failed to get data from tab'

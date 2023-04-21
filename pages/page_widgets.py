@@ -202,9 +202,27 @@ class ProgressBarPage(BasePage):
 class TabsPage(BasePage):
     locator = TabsLocators()
 
-    def working_with_tabs(self):
-        tab = self.element_is_visible(self.locator.TAB_WHAT)
+    def working_with_tabs(self, demo_tab):
+        tabs = {
+            'what': {
+                'tab': self.locator.TAB_WHAT,
+                'text': self.locator.TAB_WHAT_TEXT
+            },
+            'use': {
+                'tab': self.locator.TAB_USE,
+                'text': self.locator.TAB_USE_TEXT
+            },
+            'more': {
+                'tab': self.locator.TAB_MORE,
+                'text': self.locator.TAB_MORE_TEXT
+            },
+            'origin': {
+                'tab': self.locator.TAB_ORIGIN,
+                'text': self.locator.TAB_ORIGIN_TEXT
+            },
+        }
+        tab = self.element_is_visible(tabs[demo_tab]['tab'])
         tab.click()
         title = tab.text
-        text = self.element_is_visible(self.locator.TAB_WHAT_TEXT).text
+        text = self.element_is_visible(tabs[demo_tab]['text']).text
         return title, len(text)
