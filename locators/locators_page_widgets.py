@@ -61,3 +61,13 @@ class TabsLocators:
     TAB_USE_TEXT = (By.CSS_SELECTOR, "div[id='demo-tabpane-use']")
     TAB_MORE_TEXT = (By.CSS_SELECTOR, "div[id='demo-tabpane-more']")
     TAB_ORIGIN_TEXT = (By.CSS_SELECTOR, "div[id='demo-tabpane-origin']")
+
+
+class ToolTipsLocators:
+    # element for hover
+    BUTTON_FOR_HOVER = (By.CSS_SELECTOR, "button[id='toolTipButton']")
+    INPUT_FOR_HOVER = (By.CSS_SELECTOR, "input[id='toolTipTextField']")
+    FIRST_TEXT_HOVER = (By.CSS_SELECTOR, "div[id='texToolTopContainer'] a:first-child")
+    SECOND_TEXT_HOVER = (By.CSS_SELECTOR, "div[id='texToolTopContainer'] a:last-child")
+    # tex
+    TEXT = (By.CSS_SELECTOR, "div[class='tooltip-inner']")

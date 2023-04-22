@@ -7,7 +7,7 @@ from selenium.webdriver import Keys
 
 from generator.generator import generated_color, generated_date
 from locators.locators_page_widgets import AccordianLocators, AutoCompleteLocators, DatePickerLocators, SliderLocators, \
-    ProgressBarLocators, TabsLocators
+    ProgressBarLocators, TabsLocators, ToolTipsLocators
 from pages.base_page import BasePage
 
 
@@ -226,3 +226,19 @@ class TabsPage(BasePage):
         title = tab.text
         text = self.element_is_visible(tabs[demo_tab]['text']).text
         return title, len(text)
+
+
+class ToolTipsPage(BasePage):
+    locator = ToolTipsLocators()
+
+    def hover_over_elements(self,element):
+        elements = {
+            "button": self.locator.BUTTON_FOR_HOVER,
+            "input": self.locator.INPUT_FOR_HOVER,
+            "Contrary": self.locator.FIRST_TEXT_HOVER,
+            "1.10.32": self.locator.SECOND_TEXT_HOVER,
+        }
+        self.action_move_to_element(elements[element])
+        text = self.element_is_visible(self.locator.TEXT).text
+        time.sleep(5)
+        return text

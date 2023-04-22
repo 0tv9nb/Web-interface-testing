@@ -1,4 +1,5 @@
-from pages.page_widgets import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage
+from pages.page_widgets import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage, \
+    ToolTipsPage
 
 
 class TestWidgets:
@@ -102,3 +103,16 @@ class TestWidgets:
             assert title == 'Origin' and text > 0, 'failed to get data from tab'
             title, text = tabs_page.working_with_tabs('more')
             assert title == 'More' and text > 0, 'failed to get data from tab'
+
+    class TestToolTips:
+        def test_tool_tips(self, driver):
+            tool_tips_page = ToolTipsPage(driver, 'https://demoqa.com/tool-tips')
+            tool_tips_page.open()
+            text_button = tool_tips_page.hover_over_elements("button")
+            print(text_button)
+            text_button = tool_tips_page.hover_over_elements("input")
+            print(text_button)
+            text_button = tool_tips_page.hover_over_elements("Contrary")
+            print(text_button)
+            text_button = tool_tips_page.hover_over_elements("1.10.32")
+            print(text_button)
