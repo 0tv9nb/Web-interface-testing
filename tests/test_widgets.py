@@ -109,10 +109,10 @@ class TestWidgets:
             tool_tips_page = ToolTipsPage(driver, 'https://demoqa.com/tool-tips')
             tool_tips_page.open()
             text_button = tool_tips_page.hover_over_elements("button")
-            print(text_button)
-            text_button = tool_tips_page.hover_over_elements("input")
-            print(text_button)
-            text_button = tool_tips_page.hover_over_elements("Contrary")
-            print(text_button)
-            text_button = tool_tips_page.hover_over_elements("1.10.32")
-            print(text_button)
+            assert text_button == 'You hovered over the Button', 'no tooltip text on button hover'
+            text_input = tool_tips_page.hover_over_elements("input")
+            assert text_input == 'You hovered over the text field', 'no tooltip text on input hover'
+            text_first = tool_tips_page.hover_over_elements("Contrary")
+            assert text_first == 'You hovered over the Contrary', 'no tooltip text on Contrary hover'
+            text_second = tool_tips_page.hover_over_elements("1.10.32")
+            assert text_second == 'You hovered over the 1.10.32', 'no tooltip text on 1.10.32 hover'

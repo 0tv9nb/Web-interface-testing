@@ -231,7 +231,7 @@ class TabsPage(BasePage):
 class ToolTipsPage(BasePage):
     locator = ToolTipsLocators()
 
-    def hover_over_elements(self,element):
+    def hover_over_elements(self, element):
         elements = {
             "button": self.locator.BUTTON_FOR_HOVER,
             "input": self.locator.INPUT_FOR_HOVER,
@@ -239,6 +239,6 @@ class ToolTipsPage(BasePage):
             "1.10.32": self.locator.SECOND_TEXT_HOVER,
         }
         self.action_move_to_element(elements[element])
+        time.sleep(1)
         text = self.element_is_visible(self.locator.TEXT).text
-        time.sleep(5)
         return text
