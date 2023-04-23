@@ -71,3 +71,7 @@ class ToolTipsLocators:
     SECOND_TEXT_HOVER = (By.CSS_SELECTOR, "div[id='texToolTopContainer'] a:last-child")
     # tex
     TEXT = (By.CSS_SELECTOR, "div[class='tooltip-inner']")
+
+
+class MenuLocators:
+    MENU_ITEMS = (By.CSS_SELECTOR, "ul[id='nav'] li a")

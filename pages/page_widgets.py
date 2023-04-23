@@ -7,7 +7,7 @@ from selenium.webdriver import Keys
 
 from generator.generator import generated_color, generated_date
 from locators.locators_page_widgets import AccordianLocators, AutoCompleteLocators, DatePickerLocators, SliderLocators, \
-    ProgressBarLocators, TabsLocators, ToolTipsLocators
+    ProgressBarLocators, TabsLocators, ToolTipsLocators, MenuLocators
 from pages.base_page import BasePage
 
 
@@ -242,3 +242,15 @@ class ToolTipsPage(BasePage):
         time.sleep(1)
         text = self.element_is_visible(self.locator.TEXT).text
         return text
+
+
+class MenuPage(BasePage):
+    locator = MenuLocators()
+
+    def getting_name_item(self):
+        menu_items = self.element_are_presents(self.locator.MENU_ITEMS)
+        item_text = []
+        for item in menu_items:
+            self.action_move_to_elements(item)
+            item_text.append(item.text)
+        return len(item_text)

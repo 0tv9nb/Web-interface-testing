@@ -1,5 +1,5 @@
 from pages.page_widgets import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage, \
-    ToolTipsPage
+    ToolTipsPage, MenuPage
 
 
 class TestWidgets:
@@ -116,3 +116,10 @@ class TestWidgets:
             assert text_first == 'You hovered over the Contrary', 'no tooltip text on Contrary hover'
             text_second = tool_tips_page.hover_over_elements("1.10.32")
             assert text_second == 'You hovered over the 1.10.32', 'no tooltip text on 1.10.32 hover'
+
+    class TestMenu:
+        def test_menu(self, driver):
+            menu_page = MenuPage(driver, 'https://demoqa.com/menu')
+            menu_page.open()
+            item_text = menu_page.getting_name_item()
+            assert item_text == 8, 'the number of items in the menu does not match'
