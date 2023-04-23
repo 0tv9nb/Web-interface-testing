@@ -69,3 +69,7 @@ class BasePage:
         element = self.element_is_visible(locator)
         action = ActionChains(self.driver)
         action.move_to_element(element).perform()
+
+    def action_move_to_elements(self, element):
+        action = ActionChains(self.driver)
+        action.move_to_element(element).perform()
