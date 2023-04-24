@@ -53,3 +53,11 @@ def generated_date():
         day=random_date.strftime('%d'),
         tim=[times[rand], rand]
     )
+
+
+def generated_file():
+    path = rf'C:\Users\Elino4ka\PycharmProjects\DemoQAtest\test_file\testfile{random.randint(0, 999)}.txt'
+    file = open(path, 'w+')  # ctrl и ткни на опен там будет описание
+    file.write(f'Hello World{random.randint(0, 999)}')
+    file.close()
+    return file.name, path
