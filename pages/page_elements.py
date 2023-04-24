@@ -202,3 +202,10 @@ class LinksPage(BasePage):
             return link_href, url
         else:
             return link_href, request.status_code
+
+    def check_new_tab_bed_request(self, url):
+        request = requests.get(url)
+        if request.status_code == 200:
+            self.element_is_visible(self.locators.BAD_REQUEST).click()
+        else:
+            return request.status_code

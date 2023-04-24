@@ -119,3 +119,9 @@ class TestLinks:
         links_page.open()
         href_link, current_url = links_page.check_new_tab_simple_link()
         assert href_link == current_url
+
+    def test_broken_link(self, driver):
+        links_page = LinksPage(driver, "https://demoqa.com/links")
+        links_page.open()
+        cod = links_page.check_new_tab_bed_request("https://demoqa.com/bad-request")
+        assert cod == 400
