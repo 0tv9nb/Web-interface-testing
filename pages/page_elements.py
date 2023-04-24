@@ -1,9 +1,9 @@
 import random
 import time
-
+import requests as requests
 from generator.generator import generated_data
 from locators.locators_page_elements import TextBoxLocators, CheckBoxLocators, RadioButtonLocators, WebTablesLocators, \
-    ButtonsLocators
+    ButtonsLocators, LinkLocators
 from pages.base_page import BasePage
 
 
@@ -184,3 +184,21 @@ class ButtonsPage(BasePage):
         right_click_messege = self.element_is_visible(self.locators.RIGHT_CLICK_MESSAGE).text
         click_messege = self.element_is_visible(self.locators.CLICK_MESSAGE).text
         return [double_click_messege, right_click_messege, click_messege]
+
+
+class LinksPage(BasePage):
+    locators = LinkLocators()
+
+    def check_new_tab_simple_link(self):
+        simpl_link = self.element_is_visible(self.locators.SIMPLE_LINK)
+        link_href = simpl_link.get_attribute('href')
+        request = requests.get(link_href)
+        if request.status_code == 200:
+            simpl_link.click()
+            self.driver.switch_to.window(self.driver.window_handles[1])
+            url = self.driver.current_url
+            self.element_are_visible(self.locators.TEST)[0].click()
+            time.sleep(5)
+            return link_href, url
+        else:
+            return link_href, request.status_code
