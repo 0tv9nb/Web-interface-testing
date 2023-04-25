@@ -2,7 +2,7 @@ import random
 import time
 
 from pages.page_elements import MainPage, TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage, \
-    LinksPage
+    LinksPage, UploadAndDownloadPage
 
 
 class TestTrial:
@@ -125,3 +125,11 @@ class TestLinks:
         links_page.open()
         cod = links_page.check_new_tab_bed_request("https://demoqa.com/bad-request")
         assert cod == 400
+
+
+class TestUploadAndDownload:
+    def test_upload(self, driver):
+        unload_and_download_page = UploadAndDownloadPage(driver, "https://demoqa.com/upload-download")
+        unload_and_download_page.open()
+        file, text = unload_and_download_page.upload_file()
+        assert file == text

@@ -1,9 +1,10 @@
+import os
 import random
 import time
 import requests as requests
-from generator.generator import generated_data
+from generator.generator import generated_data, generated_file
 from locators.locators_page_elements import TextBoxLocators, CheckBoxLocators, RadioButtonLocators, WebTablesLocators, \
-    ButtonsLocators, LinkLocators
+    ButtonsLocators, LinkLocators, UploadAndDownloadLocators
 from pages.base_page import BasePage
 
 
@@ -209,3 +210,14 @@ class LinksPage(BasePage):
             self.element_is_visible(self.locators.BAD_REQUEST).click()
         else:
             return request.status_code
+
+
+class UploadAndDownloadPage(BasePage):
+    locators = UploadAndDownloadLocators()
+
+    def upload_file(self):
+        file_name, path = generated_file()
+        self.element_is_visible(self.locators.UPLOAD_FILE).send_keys(path)
+        time.sleep(2)
+        upload_name = self.element_is_visible(self.locators.UPLOAD_INFA).text
+        return file_name.split('\\')[-1], upload_name.split('\\')[-1]
