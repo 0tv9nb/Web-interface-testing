@@ -219,5 +219,6 @@ class UploadAndDownloadPage(BasePage):
         file_name, path = generated_file()
         self.element_is_visible(self.locators.UPLOAD_FILE).send_keys(path)
         time.sleep(2)
+        os.remove(path)
         upload_name = self.element_is_visible(self.locators.UPLOAD_INFA).text
         return file_name.split('\\')[-1], upload_name.split('\\')[-1]
