@@ -132,4 +132,10 @@ class TestUploadAndDownload:
         unload_and_download_page = UploadAndDownloadPage(driver, "https://demoqa.com/upload-download")
         unload_and_download_page.open()
         file, text = unload_and_download_page.upload_file()
-        assert file == text
+        assert file == text, 'file not loaded'
+
+    def test_download(self, driver):
+        unload_and_download_page = UploadAndDownloadPage(driver, "https://demoqa.com/upload-download")
+        unload_and_download_page.open()
+        check = unload_and_download_page.download_file()
+        assert check is True, 'file not downloaded'
