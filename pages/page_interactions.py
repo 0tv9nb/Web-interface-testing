@@ -1,4 +1,5 @@
 import time
+import random
 
 from locators.locators_page_interactions import SortableLocators
 from pages.base_page import BasePage
@@ -21,7 +22,9 @@ class SortablePage(BasePage):
         self.element_is_visible(elements[element]['tab']).click()
         item = self.element_are_visible(elements[element]['item'])
         before = self.sequence_of_elements(item)
-        self.swap_elements(item[0], item[1])
+
+        nums = random.sample(item, 2)
+        self.swap_elements(nums[0], nums[1])
         after = self.sequence_of_elements(item)
         return before, after
 
