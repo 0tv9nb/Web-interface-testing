@@ -7,10 +7,26 @@ from pages.base_page import BasePage
 class SortablePage(BasePage):
     locator = SortableLocators()
 
-    def mixing_elements(self):
-        self.element_is_visible(self.locator.TAB_LIST).click()
-        item_list = self.element_are_visible(self.locator.ITEM_LIST)
-        self.swap_elements(item_list[0], item_list[1])
-        self.element_is_visible(self.locator.TAB_GRID).click()
-        item_grid = self.element_are_visible(self.locator.ITEM_GRID)
-        self.swap_elements(item_grid[0], item_grid[1])
+    def mixing_elements(self, element):
+        elements = {
+            'list': {
+                'tab': self.locator.TAB_LIST,
+                'item': self.locator.ITEM_LIST
+            },
+            'grid': {
+                'tab': self.locator.TAB_GRID,
+                'item': self.locator.ITEM_GRID
+            },
+        }
+        self.element_is_visible(elements[element]['tab']).click()
+        item = self.element_are_visible(elements[element]['item'])
+        before = self.sequence_of_elements(item)
+        self.swap_elements(item[0], item[1])
+        after = self.sequence_of_elements(item)
+        return before, after
+
+    def sequence_of_elements(self, item):
+        sequence = []
+        for i in item:
+            sequence.append(i.text)
+        return sequence
