@@ -65,6 +65,10 @@ class BasePage:
         action = ActionChains(self.driver)
         action.drag_and_drop_by_offset(element, x_set, y_set).perform()
 
+    def swap_elements(self, initial, finite):
+        action = ActionChains(self.driver)
+        action.drag_and_drop(initial, finite).perform()
+
     def action_move_to_element(self, locator):
         element = self.element_is_visible(locator)
         action = ActionChains(self.driver)

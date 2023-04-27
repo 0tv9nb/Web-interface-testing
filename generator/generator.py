@@ -57,7 +57,7 @@ def generated_date():
 
 def generated_file():
     path = rf'C:\Users\Elino4ka\PycharmProjects\DemoQAtest\test_file\testfile{random.randint(0, 999)}.txt'
-    file = open(path, 'w+')  # ctrl и ткни на опен там будет описание
+    file = open(path, 'w+')
     file.write(f'Hello World{random.randint(0, 999)}')
     file.close()
     return file.name, path
