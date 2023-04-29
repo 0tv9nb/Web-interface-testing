@@ -1,7 +1,7 @@
 import time
 import random
 
-from locators.locators_page_interactions import SortableLocators
+from locators.locators_page_interactions import SortableLocators, SelectableLocators
 from pages.base_page import BasePage
 
 
@@ -33,3 +33,19 @@ class SortablePage(BasePage):
         for i in item:
             sequence.append(i.text)
         return sequence
+
+
+class SelectablePage(BasePage):
+    locator = SelectableLocators()
+
+    def interaction_with_elements(self):
+        self.element_is_visible(self.locator.TAB_LIST).click()
+        list_item = self.element_are_visible(self.locator.LIST_CONTAINER)
+        for i in list_item:
+            i.click()
+            time.sleep(1)
+        self.element_is_visible(self.locator.TAB_GRID).click()
+        grid_item = self.element_are_visible(self.locator.GRID_CONTAINER)
+        for j in grid_item:
+            j.click()
+            time.sleep(1)
