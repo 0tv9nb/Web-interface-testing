@@ -17,3 +17,6 @@ class SelectableLocators:
     # container
     LIST_CONTAINER = (By.CSS_SELECTOR, "li[class='mt-2 list-group-item list-group-item-action']")
     GRID_CONTAINER = (By.CSS_SELECTOR, "li[class='list-group-item list-group-item-action']")
+    # active
+    LIST_ITEM_ACTION = (By.CSS_SELECTOR, "li[class='mt-2 list-group-item active list-group-item-action']")
+    GRID_ITEM_ACTION = (By.CSS_SELECTOR, "li[class='list-group-item active list-group-item-action']")

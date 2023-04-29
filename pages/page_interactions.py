@@ -38,14 +38,28 @@ class SortablePage(BasePage):
 class SelectablePage(BasePage):
     locator = SelectableLocators()
 
-    def interaction_with_elements(self):
-        self.element_is_visible(self.locator.TAB_LIST).click()
-        list_item = self.element_are_visible(self.locator.LIST_CONTAINER)
-        for i in list_item:
-            i.click()
-            time.sleep(1)
-        self.element_is_visible(self.locator.TAB_GRID).click()
-        grid_item = self.element_are_visible(self.locator.GRID_CONTAINER)
-        for j in grid_item:
-            j.click()
-            time.sleep(1)
+    def interaction_with_elements(self, element):
+        elements = {
+            'list': {
+                'tab': self.locator.TAB_LIST,
+                'item': self.locator.LIST_CONTAINER,
+                'active_item': self.locator.LIST_ITEM_ACTION,
+            },
+            'grid': {
+                'tab': self.locator.TAB_GRID,
+                'item': self.locator.GRID_CONTAINER,
+                'active_item': self.locator.GRID_ITEM_ACTION,
+            },
+        }
+        self.element_is_visible(elements[element]['tab']).click()
+        list_item = self.element_are_visible(elements[element]['item'])
+        number_of_clicks = self.element_activation(list_item)
+        active_item = self.element_are_visible(elements[element]['active_item'])
+        return number_of_clicks, len(active_item)
+
+    def element_activation(self, lis):
+        amount_elements = random.randint(1, len(lis))
+        active_list = random.sample(lis, amount_elements)
+        for item in active_list:
+            item.click()
+        return amount_elements
