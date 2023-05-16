@@ -1,7 +1,8 @@
 import random
 import time
 
-from pages.page_elements import MainPage, TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage
+from pages.page_elements import MainPage, TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage, \
+    LinksPage, UploadAndDownloadPage
 
 
 class TestTrial:
@@ -110,3 +111,31 @@ class TestButtons:
         assert messeges[0] == 'You have done a double click', 'button "double click" is not pressed'
         assert messeges[1] == 'You have done a right click', 'button "right click" is not pressed'
         assert messeges[2] == 'You have done a dynamic click', 'button "dynamic click" is not pressed'
+
+
+class TestLinks:
+    def test_check_link(self, driver):
+        links_page = LinksPage(driver, "https://demoqa.com/links")
+        links_page.open()
+        href_link, current_url = links_page.check_new_tab_simple_link()
+        assert href_link == current_url
+
+    def test_broken_link(self, driver):
+        links_page = LinksPage(driver, "https://demoqa.com/links")
+        links_page.open()
+        cod = links_page.check_new_tab_bed_request("https://demoqa.com/bad-request")
+        assert cod == 400
+
+
+class TestUploadAndDownload:
+    def test_upload(self, driver):
+        unload_and_download_page = UploadAndDownloadPage(driver, "https://demoqa.com/upload-download")
+        unload_and_download_page.open()
+        file, text = unload_and_download_page.upload_file()
+        assert file == text, 'file not loaded'
+
+    def test_download(self, driver):
+        unload_and_download_page = UploadAndDownloadPage(driver, "https://demoqa.com/upload-download")
+        unload_and_download_page.open()
+        check = unload_and_download_page.download_file()
+        assert check is True, 'file not downloaded'

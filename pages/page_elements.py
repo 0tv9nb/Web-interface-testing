@@ -1,9 +1,11 @@
+import base64
+import os
 import random
 import time
-
-from generator.generator import generated_data
+import requests as requests
+from generator.generator import generated_data, generated_file
 from locators.locators_page_elements import TextBoxLocators, CheckBoxLocators, RadioButtonLocators, WebTablesLocators, \
-    ButtonsLocators
+    ButtonsLocators, LinkLocators, UploadAndDownloadLocators
 from pages.base_page import BasePage
 
 
@@ -184,3 +186,51 @@ class ButtonsPage(BasePage):
         right_click_messege = self.element_is_visible(self.locators.RIGHT_CLICK_MESSAGE).text
         click_messege = self.element_is_visible(self.locators.CLICK_MESSAGE).text
         return [double_click_messege, right_click_messege, click_messege]
+
+
+class LinksPage(BasePage):
+    locators = LinkLocators()
+
+    def check_new_tab_simple_link(self):
+        simpl_link = self.element_is_visible(self.locators.SIMPLE_LINK)
+        link_href = simpl_link.get_attribute('href')
+        request = requests.get(link_href)
+        if request.status_code == 200:
+            simpl_link.click()
+            self.driver.switch_to.window(self.driver.window_handles[1])
+            url = self.driver.current_url
+            self.element_are_visible(self.locators.TEST)[0].click()
+            time.sleep(5)
+            return link_href, url
+        else:
+            return link_href, request.status_code
+
+    def check_new_tab_bed_request(self, url):
+        request = requests.get(url)
+        if request.status_code == 200:
+            self.element_is_visible(self.locators.BAD_REQUEST).click()
+        else:
+            return request.status_code
+
+
+class UploadAndDownloadPage(BasePage):
+    locators = UploadAndDownloadLocators()
+
+    def upload_file(self):
+        file_name, path = generated_file()
+        self.element_is_visible(self.locators.UPLOAD_FILE).send_keys(path)
+        time.sleep(2)
+        os.remove(path)
+        upload_name = self.element_is_visible(self.locators.UPLOAD_INFA).text
+        return file_name.split('\\')[-1], upload_name.split('\\')[-1]
+
+    def download_file(self):
+        href = self.element_is_visible(self.locators.DOWNLOAD_FILE).get_attribute('href').split(',')
+        link = base64.b64decode(href[1])
+        path = rf'C:\Users\Elino4ka\PycharmProjects\DemoQAtest\test_file\testfile{random.randint(0, 999)}.jpg'
+        with open(path, 'wb+') as f:
+            f.write(link)
+            check_file = os.path.exists(path)
+            f.close()
+        os.remove(path)
+        return check_file

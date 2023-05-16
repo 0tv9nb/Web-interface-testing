@@ -12,3 +12,17 @@ class DataToFill:
     age: int = None
     salary: int = None
     department: str = None
+
+
+@dataclass
+class DataToColor:
+    color: str = None
+
+
+@dataclass
+class DataToDate:
+    year: str = None
+    month: str = None
+    day: str = None
+    tim: list = None
+

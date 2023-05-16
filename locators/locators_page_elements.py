@@ -56,3 +56,15 @@ class ButtonsLocators:
     DOUBLE_CLICK_MESSAGE = (By.CSS_SELECTOR, "p[id='doubleClickMessage']")
     RIGHT_CLICK_MESSAGE = (By.CSS_SELECTOR, "p[id='rightClickMessage']")
     CLICK_MESSAGE = (By.CSS_SELECTOR, "p[id='dynamicClickMessage']")
+
+
+class LinkLocators:
+    SIMPLE_LINK = (By.CSS_SELECTOR, "a[id='simpleLink']")
+    BAD_REQUEST = (By.CSS_SELECTOR, "a[id='bad-request']")
+    TEST = (By.CSS_SELECTOR, "div[class='card mt-4 top-card']")
+
+
+class UploadAndDownloadLocators:
+    UPLOAD_FILE = (By.CSS_SELECTOR, "input[id='uploadFile']")
+    UPLOAD_INFA = (By.CSS_SELECTOR, "p[id='uploadedFilePath']")
+    DOWNLOAD_FILE = (By.CSS_SELECTOR, "a[id='downloadButton']")
